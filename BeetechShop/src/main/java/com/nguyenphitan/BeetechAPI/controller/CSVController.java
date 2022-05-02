@@ -28,7 +28,7 @@ public class CSVController {
 			try {
 				fileService.save(file);
 				message = "Uploaded the file successfully: " + file.getOriginalFilename();
-				return new RedirectView("/list-products");
+				return new RedirectView("/admin-product");
 			} catch (Exception e) {
 				message = "Could not upload the file: " + file.getOriginalFilename() + "!";
 				model.addAttribute("message", message);

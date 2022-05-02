@@ -1,2 +1,0 @@
-# BeetechShop
-Beetech Shop

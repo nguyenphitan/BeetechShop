@@ -36,7 +36,7 @@ public class AuthController {
 		HttpServletRequest request
 	) {
 		authService.handleLogin(username, password, request);
-		return new RedirectView("/");
+		return new RedirectView("/synchronized/cart");
 	}
 	
 	/*
