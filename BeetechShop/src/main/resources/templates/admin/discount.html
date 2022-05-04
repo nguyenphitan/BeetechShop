@@ -30,24 +30,24 @@
 
                     <div class="header-account">
                     	<!-- logined -->
-                    	<div class="header-account_login" th:if="${session.fullname}">
+                    	<div class="header-account_login" th:if="${session.username}">
                     		<i class="far fa-user header-account_login-icon"></i>
-                            <a href="#" class="header-account-text" th:text="${session.fullname}"></a>
+                            <a href="#" class="header-account-text" th:text="${session.username}"></a>
                         </div>
                         
                         <!-- if not login -->
-                        <div class="header-account_login" th:unless="${session.fullname}">
+                        <div class="header-account_login" th:unless="${session.username}">
                             <i class="far fa-user header-account_login-icon"></i>
                             <a th:href="@{/auth/login}" class="header-account-text">Đăng nhập</a>
                         </div>
                         <span>/</span>
-                        <div class="header-account_register" th:unless="${session.fullname}">
+                        <div class="header-account_register" th:unless="${session.username}">
                             <a th:href="@{/auth/register}" class="header-account-text">Tạo tài khoản</a>
                         </div>
                         
                         <!-- logined -->
-                        <div class="header-account_login" th:if="${session.fullname}">
-                            <a th:href="@{/auth/logout}" class="header-account-text" >Đăng xuất</a>
+                        <div class="header-account_login" th:if="${session.username}">
+                            <a th:href="@{/api/v1/auth/logout}" class="header-account-text" >Đăng xuất</a>
                         </div>
                     </div>
                 </div>
@@ -57,28 +57,23 @@
                 <nav class="navbar">
                     <div class="navbar-select">
                         <ul class="navbar-list">
-                        	<li class="navbar-list_item">
-                                <a href="" class="navbar-list_item-link">
-                                    <span class="navbar-list_item-text">Quản lý danh mục sản phẩm</span>
-                                </a>
-                            </li>
                             <li class="navbar-list_item">
-                                <a href="" class="navbar-list_item-link">
+                                <a href="/admin-product" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý sản phẩm</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a th:href="@{/admin/bill}" class="navbar-list_item-link">
+                                <a href="/admin-bill" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý hóa đơn</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a th:href="@{/admin/seller}" class="navbar-list_item-link">
-                                    <span class="navbar-list_item-text">Quản lý nhân viên</span>
+                                <a href="/admin-discount" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý mã giảm giá</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a th:href="@{/admin/account}" class="navbar-list_item-link">
+                                <a class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý tài khoản</span>
                                 </a>
                             </li>
@@ -97,40 +92,69 @@
         <div style="margin-bottom: 50px;" class="container">
             <div class="grid fix-wide" style="padding-top: 45px">
                 <div class="container_header">
-                    <span class="container_header-text" >Quản lý nhân viên</span>
+                    <span class="container_header-text" >Quản lý mã giảm giá</span>
                 </div>
             </div>
 
             <div class="grid fix-wide">
+            
+            	<!-- Add product -->
+		        <div class="t-add-area">
+		        	<a href="/admin/add-discount">Thêm mã giảm giá</a>
+		        </div>
+		        
+		        <!-- End add product -->
+		        
                 <table class="table-bill">
                     <thead >
                         <tr style="background-color: rgba(31, 163, 101, 0.4);">
                             <th scope="col" class="bill-index" >STT</th>
                             <th scope="col" class="bill-information">Thông tin</th>
-                            <th scope="col" class="bill-order-date">Vai trò</th>
+                            <th scope="col" class="bill-order-date">Chức năng</th>
                         </tr>
                     </thead>
-                    <tbody class="table-bill-title" th:each="i: ${#numbers.sequence(sellers.size() - 1, 0, -1)}" th:with="seller = ${sellers[i]}">
+                    <tbody class="table-bill-title" th:each="discount, index : ${discounts}">
                     	<tr class="bill-information-detail">
-                            <th scope="row" class="bill-index" th:text="${i+1}" ></th>
-                            <td>
-                                Họ và tên:
-                                <span style="width:250px;display:inline-block" th:text="${seller.fullname}"></span>
-                                SĐT: 
-                                <span style="width:200px;display:inline-block" th:text="${seller.phone}"></span>
-                                Email:
-                                <span th:text="${seller.email}"></span></br><br>
-                                Địa chỉ:
-                                <span th:text="${seller.address}"></span></br>
+                            <th scope="row" class="bill-index" th:text="${index.count}" ></th>
+                            <td class="t-info-col">
+                                <div>
+                                	<div>
+                                		Số tiền cần để đạt được discount:
+		                                <span class="t-title-1" th:text="${discount.value}"></span>
+		                                <input hide class="t-hide t-outline-none input-name-update" type="text" th:value="${discount.value}">
+		                                Giá trị discount:
+		                                <span class="t-title-2" th:text="${discount.discount}"></span>
+		                                <input hide class="t-hide t-outline-none input-price-update t-text-right" type="text" th:value="${discount.discount}">
+		                                %
+                                	</div>
+                                </div>
                             </td>
-                            <td th:text="${seller.role}" style="text-align: center;"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: center;">
-                                <span th:text="${seller.id}" style="display: none;"></span>
-                                <div class="remove_seller" style="padding: 6px 2px; cursor: pointer;">Xóa nhân viên</div>
+                            <!-- <td style="text-align: center;">
+                            	<span class="product_id" style="display: none;" th:text="${product.id}"></span>
+                                <a href="#" class="delete_product t-btn-common t-m-w-134" style="padding: 6px 2px;">Xóa sản phẩm</a>
+                                <span class="account_role" th:text="${session.role}" style="display: none"></span>
+                            </td> -->
+                            
+                            <td class="t-func-col">
+                            	<div class="t-div-function">
+                            		<span class="t-no-click"> 
+                            			<svg style="width: 13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            				<path d="M311.9 335.1l-132.4 136.8C174.1 477.3 167.1 480 160 480c-7.055 0-14.12-2.702-19.47-8.109l-132.4-136.8C-9.229 317.8 3.055 288 27.66 288h264.7C316.9 288 329.2 317.8 311.9 335.1z"/>
+                            			</svg>
+                            		</span>
+                            		<div class="t-function-box">
+                            			<div>
+                            				<a class="t-function-item t-update">Sửa</a>
+	                            			<span class="t-hide" th:text="${discount.id}"></span>
+	                            			<a class="t-function-item t-delete">Xóa</a>	
+                            			</div>
+                            			<div class="t-hide">
+                            				<a class="t-function-item t-save-update">Lưu</a>
+	                            			<span class="t-hide" th:text="${discount.id}"></span>
+	                            			<a class="t-function-item t-cancel-update">Hủy</a>	
+                            			</div>
+                            		</div>
+                            	</div>
                             </td>
                         </tr>
                     </tbody>
@@ -252,7 +276,7 @@
         </div>
     </div>
 
-    <script th:src="@{/js/seller.js}"></script>
+    <script th:src="@{/js/discount.js}"></script>
 
 </body>
 </html>

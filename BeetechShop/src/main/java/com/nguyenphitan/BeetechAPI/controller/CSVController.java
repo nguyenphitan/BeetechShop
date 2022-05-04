@@ -13,7 +13,11 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.nguyenphitan.BeetechAPI.iofile.IOFile;
 import com.nguyenphitan.BeetechAPI.service.CSVService;
 
-
+/**
+ * Admin thêm mới nhiều sản phẩm. (csv file)
+ * Created by: NPTAN
+ * Version: 1.0
+ */
 @CrossOrigin("http://localhost:8081")
 @Controller
 @RequestMapping("/api/v1/csv")
@@ -21,6 +25,11 @@ public class CSVController {
 	@Autowired
 	CSVService fileService;
 
+	/*
+	 * Upload file csv chứa danh sách các sản phẩm
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
 	@PostMapping("/upload")
 	public RedirectView uploadFile(Model model, @RequestParam("file") MultipartFile file) {
 		String message = "";

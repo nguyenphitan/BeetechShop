@@ -14,6 +14,11 @@ import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controller sản phẩm
+ * Created by: NPTAN
+ * Version: 1.0
+ */
 @RestController
 @RequestMapping("public/api/v1/products")
 @RequiredArgsConstructor
@@ -21,11 +26,22 @@ public class ProductController {
 	@Autowired
 	ProductRepository productRepository;
 	
+	/*
+	 * Lấy ra tất cả sản phẩm
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
 	@GetMapping()
 	public List<Product> getAllProducts() {
 		return productRepository.findAll();
 	}
 	
+	
+	/*
+	 * Lấy sản phẩm theo id
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
 	@GetMapping("/{id}")
 	public Product getProduct(@PathVariable("id") Long id) {
 		return productRepository.findById(id).orElseThrow(

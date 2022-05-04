@@ -19,7 +19,13 @@ import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
 import com.nguyenphitan.BeetechAPI.repository.UserRepository;
 import com.nguyenphitan.BeetechAPI.repository.discount.DiscountRepository;
 import com.nguyenphitan.BeetechAPI.service.CartService;
+import com.nguyenphitan.BeetechAPI.service.DiscountService;
 
+/**
+ * Controller quản lý các page
+ * Created by: NPTAN
+ * Version: 1.0
+ */
 @Controller
 public class HomeController {
 	@Autowired
@@ -40,8 +46,13 @@ public class HomeController {
 	@Autowired
 	CartService cartService;
 	
+	@Autowired
+	DiscountService discountService;
+	
 	/*
-	 * Home (hiển thị danh sách sản phẩm)
+	 * Hiển thị trang home (danh sách các sản phẩm)
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/")
 	public ModelAndView indexPage(HttpServletRequest request) {
@@ -51,8 +62,11 @@ public class HomeController {
 		return modelAndView;
 	}
 	
+	
 	/*
-	 * Đăng nhập
+	 * Hiển thị đăng nhập
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("auth/login")
 	public ModelAndView loginPage() {
@@ -60,8 +74,11 @@ public class HomeController {
 		return modelAndView;
 	}
 	
+	
 	/*
-	 * Đăng ký tài khoản
+	 * Hiển thị đăng ký
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("auth/register")
 	public ModelAndView registerPage() {
@@ -69,8 +86,11 @@ public class HomeController {
 		return modelAndView;
 	}
 	
+	
 	/*
-	 * Admin quản lý sản phẩm
+	 * Hiển thị trang quản lý sản phẩm
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/admin-product")
 	public ModelAndView adminPage() {
@@ -80,8 +100,11 @@ public class HomeController {
 		return modelAndView;
 	}
 	
+	
 	/*
-	 * Admin thêm một sản phẩm
+	 * Hiển thị trang thêm mới sản phẩm
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/admin/add-product")
 	public ModelAndView addProductPage() {
@@ -89,8 +112,11 @@ public class HomeController {
 		return modelAndView;
 	}
 	
+	
 	/*
-	 * Admin thêm danh sách sản phẩm
+	 * Hiển thị trang thêm mới danh sách sản phẩm
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/admin/add-list")
 	public ModelAndView addListProduct() {
@@ -100,7 +126,9 @@ public class HomeController {
 	
 	
 	/*
-	 * Chi tiết sản phẩm
+	 * Hiển thị trang chi tiết sản phẩm
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/detail")
 	public ModelAndView detailPage(@RequestParam("id") Long id, HttpServletRequest request) {
@@ -110,8 +138,11 @@ public class HomeController {
 		return modelAndView;
 	}
 	
+	
 	/*
-	 * Danh sách giỏ hàng
+	 * Hiển thị danh sách sản phẩm trong giỏ hàng
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/list-cart")
 	public ModelAndView cartPage(HttpServletRequest request) {
@@ -119,16 +150,48 @@ public class HomeController {
 		return modelAndView;
 	}
 	
+	
 	/*
-	 * Giao diện hóa đơn
+	 * Hiển thị trang quản lý hóa đơn
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/admin-bill")
 	public ModelAndView billPage(HttpServletRequest request) {
 		ModelAndView modelAndView = cartService.getAllCart("admin/bill", request);
 		return modelAndView;
-	}	
+	}
+	
+	
 	/*
-	 * Giao diện thanh toán
+	 * Hiển thị trang thêm mới mã giảm giá
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
+	@GetMapping("/admin/add-discount")
+	public ModelAndView createDiscount() {
+		ModelAndView modelAndView = new ModelAndView("admin/add-discount");
+		return modelAndView;
+	}
+	
+	
+	/*
+	 * Hiển thị trang quản lý mã giảm giá
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
+	@GetMapping("/admin-discount")
+	public ModelAndView discountPage(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView("admin/discount");
+		modelAndView.addObject("discounts", discountService.getAlls());
+		return modelAndView;
+	}
+	
+	
+	/*
+	 * Hiển thị giao diện thanh toán online
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/payment")
 	public ModelAndView payment() {
@@ -136,8 +199,11 @@ public class HomeController {
 		return modelAndView;
 	}
 	
+	
 	/*
-	 * Trả về thông tin thanh toán cho khách hàng
+	 * Hiển thị thông tin sau khi thanh toán cho khách hàng
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/vnpay_return")
 	public ModelAndView returnPage(

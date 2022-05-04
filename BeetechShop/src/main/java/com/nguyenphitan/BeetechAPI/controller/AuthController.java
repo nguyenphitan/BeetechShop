@@ -2,9 +2,7 @@ package com.nguyenphitan.BeetechAPI.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.nguyenphitan.BeetechAPI.entity.User;
 import com.nguyenphitan.BeetechAPI.service.AuthService;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Đăng nhập, đăng ký, đăng xuất.
+ * Created by: NPTAN
+ * Version: 1.0
+ */
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
@@ -27,7 +28,9 @@ public class AuthController {
 	
 	
 	/*
-	 * Đăng nhập, xác thực:
+	 * Đăng nhập, xác thực
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@PostMapping("/login")
 	public RedirectView authenticateUser(
@@ -39,17 +42,23 @@ public class AuthController {
 		return new RedirectView("/synchronized/cart");
 	}
 	
+	
 	/*
-	 * Đăng ký tài khoản
+	 * Đăng ký thêm mới tài khoản
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@PostMapping("/register")
 	public RedirectView createUser(@RequestParam("username") String username, @RequestParam("password") String password) {
-		User user = authService.handleRegister(username, password);
+		authService.handleRegister(username, password);
 		return new RedirectView("/auth/login");
 	}
 	
+	
 	/*
-	 * Đăng xuất -> xóa token khỏi session
+	 * Đăng xuất tài khoản
+	 * Created by: NPTAN
+	 * Version: 1.0
 	 */
 	@GetMapping("/logout")
 	public RedirectView logout(HttpServletRequest request, HttpServletResponse response) {

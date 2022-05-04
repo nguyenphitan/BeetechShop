@@ -2,8 +2,6 @@ package com.nguyenphitan.BeetechAPI.controller.admin;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.nguyenphitan.BeetechAPI.entity.discount.Discount;
-import com.nguyenphitan.BeetechAPI.repository.discount.DiscountRepository;
+import com.nguyenphitan.BeetechAPI.service.DiscountService;
 
 /*
  * Admin thêm, sửa, xóa mã giảm giá
@@ -23,39 +23,64 @@ import com.nguyenphitan.BeetechAPI.repository.discount.DiscountRepository;
  * Version: 1.0
  */
 @RestController
-@RequestMapping("admin/api/v1/discounts")
+@RequestMapping("/admin/api/v1/discounts")
 public class AdminDiscountController {
 	
 	@Autowired
-	DiscountRepository discountRepository;
+	DiscountService discountService;
 	
+	/*
+	 * Lấy ra tất cả mã giảm giá
+	 * Created by: NPTAN (15/04/2022)
+	 * Version: 1.0
+	 */
 	@GetMapping()
 	public List<Discount> getAlls() {
-		List<Discount> discounts = discountRepository.findAll();
-		return discounts;
+		return discountService.getAlls();
 	}
 	
+	
+	/*
+	 * Lấy ra mã giảm giá theo id
+	 * Created by: NPTAN (15/04/2022)
+	 * Version: 1.0
+	 */
 	@GetMapping("/{id}")
 	public Discount getById(@PathVariable("id") Long id) {
-		Discount discount = discountRepository.getById(id);
-		return discount;
+		return discountService.getById(id);
 	}
 	
+	
+	/*
+	 * Thêm mới mã giảm giá
+	 * Created by: NPTAN (15/04/2022)
+	 * Version: 1.0
+	 */
 	@PostMapping()
-	public Discount addDiscount(@Valid @RequestBody Discount discount) {
-		discount = discountRepository.save(discount);
-		return discount;
+	public RedirectView addDiscount(@RequestParam("discount") Double discount, @RequestParam("value") Double value) {
+		return discountService.createDiscount(discount, value);
 	}
 	
+	
+	/*
+	 * Cập nhật mã giảm giá
+	 * Created by: NPTAN (15/04/2022)
+	 * Version: 1.0
+	 */
 	@PutMapping("/{id}")
 	public Discount updateDiscount(@PathVariable("id") Long id, @RequestBody Discount discount) {
-		discount = discountRepository.save(discount);
-		return discount;
+		return discountService.update(id, discount);
 	}
 	
+	
+	/*
+	 * Loại bỏ mã giảm giá
+	 * Created by: NPTAN (15/04/2022)
+	 * Version: 1.0
+	 */
 	@DeleteMapping("/{id}") 
 	public void deleteDiscount(@PathVariable("id") Long id) {
-		discountRepository.deleteById(id);
+		discountService.delete(id);
 	}
 	
 }

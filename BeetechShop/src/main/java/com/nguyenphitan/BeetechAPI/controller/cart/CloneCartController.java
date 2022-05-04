@@ -15,6 +15,11 @@ import com.nguyenphitan.BeetechAPI.entity.Cart;
 import com.nguyenphitan.BeetechAPI.payload.ProductRequest;
 import com.nguyenphitan.BeetechAPI.service.CloneCartService;
 
+/**
+ * Giỏ hàng ảo (khi chưa đăng nhập)
+ * Created by: NPTAN (10/04/2022)
+ * Version: 1.0
+ */
 @RestController
 @RequestMapping("/clone")
 public class CloneCartController {
@@ -22,11 +27,22 @@ public class CloneCartController {
 	@Autowired
 	CloneCartService cloneCartService;
 	
+	/*
+	 * Thêm sản phẩm vào giỏ hàng
+	 * Created by: NPTAN (10/04/2022)
+	 * Version: 1.0
+	 */
 	@PostMapping("/cart")
 	public Cart addProductToCloneCart(@Valid @RequestBody ProductRequest productRequest, HttpServletRequest request) {
 		return cloneCartService.addProductToCloneCart(productRequest, request);
 	}
 	
+	
+	/*
+	 * Xóa sản phẩm khỏi giỏ hàng
+	 * Created by: NPTAN (10/04/2022)
+	 * Version: 1.0
+	 */
 	@DeleteMapping("/cart/{id}")
 	public void deleteCartSession(@PathVariable("id") Long productId, HttpServletRequest request) {
 		cloneCartService.deleteProduct(productId, request);

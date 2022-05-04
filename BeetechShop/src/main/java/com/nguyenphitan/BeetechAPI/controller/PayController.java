@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nguyenphitan.BeetechAPI.service.PayService;
 
+/**
+ * Thanh toán
+ * Created by: NPTAN
+ * Version: 1.0
+ */
 @RestController
 @RequestMapping("/pay")
 public class PayController {
@@ -16,6 +21,12 @@ public class PayController {
 	@Autowired
 	private PayService payService;
 	
+	
+	/*
+	 * Reset giỏ hàng khi thanh toán thành công
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
 	@DeleteMapping()
 	public void payment(HttpServletRequest request) {
 		payService.payment(request);

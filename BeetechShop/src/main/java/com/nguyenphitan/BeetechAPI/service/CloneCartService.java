@@ -2,8 +2,6 @@ package com.nguyenphitan.BeetechAPI.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.stereotype.Service;
-
 import com.nguyenphitan.BeetechAPI.entity.Cart;
 import com.nguyenphitan.BeetechAPI.payload.ProductRequest;
 

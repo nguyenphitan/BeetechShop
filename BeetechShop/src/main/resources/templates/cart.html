@@ -128,24 +128,24 @@
 
                     <div class="header-account">
                     	<!-- logined -->
-                    	<div class="header-account_login" th:if="${session.fullname}">
+                    	<div class="header-account_login" th:if="${session.username}">
                     		<i class="far fa-user header-account_login-icon"></i>
-                            <a href="#" class="header-account-text" th:text="${session.fullname}"></a>
+                            <a href="#" class="header-account-text" th:text="${session.username}"></a>
                         </div>
                         
                         <!-- if not login -->
-                        <div class="header-account_login" th:unless="${session.fullname}">
+                        <div class="header-account_login" th:unless="${session.username}">
                             <i class="far fa-user header-account_login-icon"></i>
                             <a th:href="@{/auth/login}" class="header-account-text">Đăng nhập</a>
                         </div>
                         <span>/</span>
-                        <div class="header-account_register" th:unless="${session.fullname}">
+                        <div class="header-account_register" th:unless="${session.username}">
                             <a th:href="@{/auth/register}" class="header-account-text">Tạo tài khoản</a>
                         </div>
                         
                         <!-- logined -->
-                        <div class="header-account_login" th:if="${session.fullname}">
-                            <a th:href="@{/auth/logout}" class="header-account-text" >Đăng xuất</a>
+                        <div class="header-account_login" th:if="${session.username}">
+                            <a th:href="@{/api/v1/auth/logout}" class="header-account-text" >Đăng xuất</a>
                         </div>
                     </div>
                 </div>
@@ -379,7 +379,7 @@
                         <div class="footer__block">
                             <h3 class="footer__block-title">Liên kết với chúng tôi</h3>
                             <div class="footer__block-social">
-                                <a href="https://www.facebook.com/docongban" target="_blank" class="footer__block-social-link">
+                                <a href="https://www.facebook.com/PhiTan2001.Com.Vn" target="_blank" class="footer__block-social-link">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="" class="footer__block-social-link">
@@ -407,7 +407,7 @@
         </footer>
         <!-- End footer -->
         <div class="footer__copyright">
-            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company. Cloned by BanDC</span>
+            <span class="footer__copyright-text">Copyright © 2021 The Pizza Company.</span>
         </div>
     </div>
 

@@ -148,8 +148,8 @@ function handlePayment() {
 		
 		// Gọi API tạo hóa đơn:
 		
-		// Xóa sản phẩm gỏi giỏ hàng
-		deleteProductInCart();
+		// Reset sản phẩm trong giỏ hàng
+		resetCart();
 	}
 	else if( payMethod === 't-pay-online' ) {
 		window.location.href = "http://localhost:8081/payment";
@@ -158,11 +158,11 @@ function handlePayment() {
 }
 
 /*
-	Xử lý xóa danh sách sản phẩm trong giỏ hàng.
+	Xử lý reset danh sách sản phẩm trong giỏ hàng.
 	Created by: NPTAN (29/04/2022)
 	Version: 1.0
 */
-function deleteProductInCart() {
+function resetCart() {
 	// Update số lượng sản phẩm còn lại trong database
 	$.ajax({
         type: "DELETE",

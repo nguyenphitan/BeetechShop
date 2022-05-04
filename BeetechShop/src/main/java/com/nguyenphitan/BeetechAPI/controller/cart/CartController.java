@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +16,11 @@ import com.nguyenphitan.BeetechAPI.payload.ProductRequest;
 import com.nguyenphitan.BeetechAPI.repository.CartRepository;
 import com.nguyenphitan.BeetechAPI.service.CartService;
 
+/**
+ * Controller giỏ hàng
+ * Created by: NPTAN (10/04/2022)
+ * Version: 1.0
+ */
 @RestController
 @RequestMapping("/cart")
 public class CartController {
@@ -26,16 +30,22 @@ public class CartController {
 	@Autowired
 	CartService cartService;
 	
+	/*
+	 * Thêm sản phẩm vào giỏ hàng
+	 * Created by: NPTAN (10/04/2022)
+	 * Version: 1.0
+	 */
 	@PostMapping()
 	public Cart addToCart(@Valid @RequestBody ProductRequest productRequest, HttpServletRequest request)  {
 		return cartService.addToCart(productRequest, request);
 	}
-	
-	@PutMapping("/{id}")
-	public Cart updateCart(@PathVariable("id") Long id, @Valid @RequestBody Cart cart) {
-		return cartRepository.save(cart);
-	}
 
+	
+	/*
+	 * Xóa sản phẩm khỏi giỏ hàng
+	 * Created by: NPTAN (10/04/2022)
+	 * Version: 1.0
+	 */
 	@DeleteMapping("/{id}")
 	public void deleteCart(@PathVariable("id") Long id) {
 		cartRepository.deleteById(id);
