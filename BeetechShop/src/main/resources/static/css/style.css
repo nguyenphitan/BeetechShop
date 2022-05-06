@@ -467,6 +467,23 @@ html {
     color: var(--active-color);
 }
 
+.t-text-right {
+	text-align: right;	
+}
+
+.t-inline-block {
+	display: inline-block;
+}
+
+.t-w-100 {
+	width: 100px !important;
+}
+
+.t-m-right-150 {
+	margin-right: 150px;
+}
+
+
 /* slider */
 .slider{
     width: 1110px;
@@ -1186,7 +1203,7 @@ img{
 }
 
 .t-title-1 {
-	width:250px;
+	width: 250px;
 	display:inline-block;
 }
 
@@ -1234,9 +1251,10 @@ th, td{
     background-color: var(--primary-color);
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .complete{
-    pointer-events: none;
+    pointer-events: none !important;
     background-color:#006a3277;
 }

@@ -33,14 +33,11 @@
                         <div class="header-delivery" th:switch="${session.role}">
                             <div class="header-delivery_item active">
                                 <i class="fas fa-shipping-fast header-delivery_item-logo"></i>
-                                <a class="header-delivery_item-text" th:href="${session.role == 'ADMIN' ? 'admin/bill' : '#'}" th:text="${session.role == 'ADMIN' ? 'Quản lý hóa đơn' : 'Đặt giao hàng'}">Đặt giao hàng</a>
+                                <a class="header-delivery_item-text" th:href="${session.role == 'ADMIN' ? '/admin-product' : '#'}" th:text="${session.role == 'ADMIN' ? 'Quản lý sản phẩm' : 'Đặt giao hàng'}">Đặt giao hàng</a>
                             </div>
                             <div class="header-delivery_item">
                                 <i class="fas fa-store-alt header-delivery_item-logo"></i>
-                                <a class="header-delivery_item-text" th:href="${session.role == 'ADMIN' ? 'admin/seller' : '#'}" th:text="${session.role == 'ADMIN' ? 'Quản lý nhân viên' : 'Đặt đến lấy'}">Đặt đến lấy</a>
-                            </div>
-                            <div class="header-delivery_item"  th:case="'ADMIN'">
-                                <a class="header-delivery_item-text" th:href="${session.role == 'ADMIN' ? 'admin/account' : '#'}">Quản lý tài khoản</a>
+                                <a class="header-delivery_item-text" th:href="${session.role == 'ADMIN' ? '/admin-discount' : '#'}" th:text="${session.role == 'ADMIN' ? 'Quản lý mã giảm giá' : 'Đặt đến lấy'}">Đặt đến lấy</a>
                             </div>
                         </div>
 
@@ -84,18 +81,6 @@
 	                        </div>
                         </div>
                     </div>
-
-                    <!-- <ul class="manager__page">
-                        <li class="manager__page--item">
-                            <a href="" class="manager__page--item-link">Quản lý sản phẩm</a>
-                        </li>
-                        <li class="manager__page--item">
-                            <a href="" class="manager__page--item-link">Quản lý Account</a>
-                        </li>
-                        <li class="manager__page--item">
-                            <a href="" class="manager__page--item-link">Doanh số</a>
-                        </li>
-                    </ul> -->
 
                     <div class="header-account">
                     	<!-- logined -->

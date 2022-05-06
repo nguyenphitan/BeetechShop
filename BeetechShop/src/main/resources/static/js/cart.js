@@ -116,6 +116,9 @@ function handlePayment() {
 	let quantitys = $('.t-quantity');	// Số lượng còn lại
 	let quantitySelecteds = $('.t-quantity-selected');	// Số lượng đã chọn
 	let productNames = $('.t-product-name');	// Tên sản phẩm
+	let productIds = $('.t-product-id')		// ID sản phẩm
+	let userId = Number($('.t-user-id').text());	// ID khách hàng
+	
 	// 1. Kiểm tra xem trong giỏ hàng có sản phẩm nào hay chưa?
 	if( productNames.length == 0 ) {
 		alert("Bạn chưa có sản phẩm nào trong giỏ hàng.");
@@ -134,6 +137,22 @@ function handlePayment() {
 		}
 	}
 	
+	// Buil object:
+	// 1. Build List ProductRequest:
+	let productRequests = [];
+	for(let i = 0 ; i < productIds.length ; i++) {
+		let proRequest = {};
+		proRequest.idProduct = Number( $(productIds[i]).text() );
+		proRequest.quantitySelected = Number( $(quantitySelecteds[i]).val() );
+		productRequests.push(proRequest);
+	}
+	
+	// 2. Build BillRequest:
+	let billRequest = {};
+	billRequest.userId = userId;
+	billRequest.productRequests = productRequests;
+	
+	
 	// Kiểm tra phương thức thanh toán:
 	let payMethod = $('input[name="t-pay-method"]:checked').attr('id');
 	
@@ -142,14 +161,26 @@ function handlePayment() {
 	// 1. Tạo hóa đơn
 	// 2. xóa các sản phẩm trong giỏ hàng:
 	if( payMethod === 't-pay-offline' ) {
-		// Lấy user id:
-		let userId = Number($('.t-user-id').text());
-		
-		
 		// Gọi API tạo hóa đơn:
+		$.ajax({
+            type: "POST",
+            url: "http://localhost:8081/public/bill",
+            // async: false,
+            data: JSON.stringify(billRequest),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (response) {
+            	alert("Thanh toán thành công.");
+				// Reset sản phẩm trong giỏ hàng
+				resetCart();
+            	
+            },
+            error: function(reject) {
+                alert("Không thành công.");
+                console.log(reject);
+            }
+        });	
 		
-		// Reset sản phẩm trong giỏ hàng
-		resetCart();
 	}
 	else if( payMethod === 't-pay-online' ) {
 		window.location.href = "http://localhost:8081/payment";

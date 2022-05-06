@@ -17,7 +17,7 @@ import com.nguyenphitan.BeetechAPI.jwt.JwtAuthenticationFilter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	// Tạo Bean PasswordEndcoder
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -42,14 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable();
 		http.authorizeRequests().antMatchers("/api/v1/auth/**").permitAll();
+		http.authorizeRequests().antMatchers("/", "/swagger-ui.html", "/resources/**", "/vendor/**", "/css/**",
+				"/js/**", "/fonts/**", "/img/**", "/static/**").permitAll();
+		http.authorizeRequests().antMatchers("/public/**", "/list-cart", "/cart", "/clone/**", "/list-products/**",
+				"/detail/**", "/auth/**", "/pay/**").permitAll();
 		http.authorizeRequests()
-				.antMatchers("/", "/swagger-ui.html", "/resources/**", "/vendor/**", "/css/**", "/js/**", "/fonts/**",
-						"/img/**", "/static/**")
-				.permitAll();
-		http.authorizeRequests()
-				.antMatchers("/public/**", "/list-cart", "/cart", "/clone/**", "/list-products/**", "/detail/**", "/auth/**")
-				.permitAll();
-		http.authorizeRequests().antMatchers("/admin/**", "/api/v1/csv/**", "/add-list/**", "/admin-bill/**").hasAnyAuthority("ROLE_ADMIN");
+				.antMatchers("/admin/**", "/api/v1/csv/**", "/add-list/**", "/admin-bill/**", "/public/bill/update/**")
+				.hasAnyAuthority("ROLE_ADMIN");
 		http.authorizeRequests().anyRequest().authenticated();
 	}
 }

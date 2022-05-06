@@ -18,6 +18,17 @@
 <body>
     <!--Begin display -->
      <div class="container">
+     
+     	<!-- Id user -->
+     	<div class="t-user-id" th:text="${session.idUser}" style="display: none;"></div>
+     	
+         <!-- Cart is paying info -->
+         <div style="display: none;" th:each="cartResponse : ${session.listProducts}">
+         	<span class="t-product-id" th:text="${cartResponse.product.id}"></span>
+         	<span class="t-quantitySelected" th:text="${cartResponse.quantity}"></span>
+         </div>
+         <!-- End cart is paying info -->
+     		
          <div class="header clearfix">
              <h3 class="text-muted">VNPAY RESPONSE</h3>
          </div>
@@ -51,11 +62,7 @@
                  <label >Thời gian thanh toán:</label>
                  <label th:text="${data['payDate']}"></label>
              </div> 
-            <!--  
-             <div th:each="param : ${}">
              
-             </div>
-              -->
              <div class="form-group">
                  <label >Kết quả:</label>
                  <label th:text="${data['responseCode'] == '00' ? 'Giao dịch thành công' : 'Giao dịch không thành công'}"></label>
@@ -74,38 +81,7 @@
      </div>  
      
      <!-- Javascript -->
-     <script type="text/javascript">
-     $(document).ready(function() {
-    	// Format lại số tiền:
-    	let amount = Math.floor( Number($('#t-amount-clone').text()) / 100 );
-     	$('#t-amount').text(amount);  	 
-    	 
-    	// Nếu responseCode = '00' -> giao dịch thành công -> xóa sản phẩm khỏi giỏ hàng:
-    	let responseCode = $('.responseCode').text();
-    	if( responseCode === '00' ) {
-    		deleteProductInCart();
-    	}
-    	
-    	function deleteProductInCart() {
-			// Xóa danh sách sản phẩm đã thanh toán trong giỏ hàng
-			// Update số lượng sản phẩm còn lại trong database
-			$.ajax({
-	            type: "DELETE",
-	            url: `http://localhost:8081/pay`,
-	            success: function (response) {
-	            	alert("Đặt hàng thành công, đơn hàng sẽ được giao trong vài ngày tới.");
-	            }
-	        });
-		}
-    	
-    	// Click quay về trang chủ:
- 	   	$('.t-return-home').click(function () {
- 	   		window.location.href = "http://localhost:8081";
- 		});
-    	 
-     })
-     
-     </script>
+     <script th:src="@{/js/vnpay.js}"></script>
      
      
  </body>

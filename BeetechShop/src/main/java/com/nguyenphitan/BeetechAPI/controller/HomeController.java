@@ -1,8 +1,6 @@
 package com.nguyenphitan.BeetechAPI.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,8 +16,10 @@ import com.nguyenphitan.BeetechAPI.repository.CartRepository;
 import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
 import com.nguyenphitan.BeetechAPI.repository.UserRepository;
 import com.nguyenphitan.BeetechAPI.repository.discount.DiscountRepository;
+import com.nguyenphitan.BeetechAPI.service.BillService;
 import com.nguyenphitan.BeetechAPI.service.CartService;
 import com.nguyenphitan.BeetechAPI.service.DiscountService;
+import com.nguyenphitan.BeetechAPI.service.VNPayService;
 
 /**
  * Controller quản lý các page
@@ -48,6 +48,12 @@ public class HomeController {
 	
 	@Autowired
 	DiscountService discountService;
+	
+	@Autowired
+	VNPayService vnPayService;
+	
+	@Autowired
+	BillService billService;
 	
 	/*
 	 * Hiển thị trang home (danh sách các sản phẩm)
@@ -152,18 +158,6 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị trang quản lý hóa đơn
-	 * Created by: NPTAN
-	 * Version: 1.0
-	 */
-	@GetMapping("/admin-bill")
-	public ModelAndView billPage(HttpServletRequest request) {
-		ModelAndView modelAndView = cartService.getAllCart("admin/bill", request);
-		return modelAndView;
-	}
-	
-	
-	/*
 	 * Hiển thị trang thêm mới mã giảm giá
 	 * Created by: NPTAN
 	 * Version: 1.0
@@ -189,6 +183,17 @@ public class HomeController {
 	
 	
 	/*
+	 * Hiển thị trang quản lý hóa đơn
+	 * Created by: NPTAN (06/05/2022)
+	 * Version: 1.0
+	 */
+	@GetMapping("/admin-bill")
+	public ModelAndView billManagerPage() {
+		return billService.billManagerPage();
+	}
+	
+	
+	/*
 	 * Hiển thị giao diện thanh toán online
 	 * Created by: NPTAN
 	 * Version: 1.0
@@ -207,7 +212,6 @@ public class HomeController {
 	 */
 	@GetMapping("/vnpay_return")
 	public ModelAndView returnPage(
-	
 			@RequestParam("vnp_Amount") String amount,
 			@RequestParam("vnp_BankCode") String bankCode,
 			@RequestParam("vnp_BankTranNo") String bankTranNo,
@@ -222,24 +226,7 @@ public class HomeController {
 			@RequestParam("vnp_SecureHash") String secureHash
 			
 	) {
-		ModelAndView modelAndView = new ModelAndView("vnpay_return");
-		
-		Map<String, String> data = new HashMap<String, String>();
-		data.put("amount", amount);
-		data.put("bankCode", bankCode);
-		data.put("bankTranNo", bankTranNo);
-		data.put("cardType", cardType);
-		data.put("orderInfo", orderInfo);
-		data.put("payDate", payDate);
-		data.put("responseCode", responseCode);
-		data.put("tmnCode", tmnCode);
-		data.put("transactionNo", transactionNo);
-		data.put("transactionStatus", transactionStatus);
-		data.put("txnRef", txnRef);
-		data.put("secureHash", secureHash);
-		
-		modelAndView.addObject("data", data);
-		
-		return modelAndView;
+		return vnPayService.vnpayReturnPage(
+				amount, bankCode, bankTranNo, cardType, orderInfo, payDate, responseCode, tmnCode, transactionNo, transactionStatus, txnRef, secureHash);
 	}
 }

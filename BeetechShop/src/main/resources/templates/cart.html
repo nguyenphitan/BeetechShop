@@ -214,6 +214,7 @@
                                 <div class="product-cart__content-title t-product-name" th:text="${cartResponse.product.name}"></div>
                                 <div class="product-cart__content-decrip" th:text="'Còn lại: ' + ${cartResponse.product.quantity}"></div>
                                 <span class="t-quantity" th:text="${cartResponse.product.quantity}" style="display: none;"></span>
+                                <span class="t-product-id t-hide" th:text="${cartResponse.product.id}"></span>
                             </div>
                             <div class="product-cart__price-old t-text-right" th:text="${cartResponse.product.price}"></div>
                             

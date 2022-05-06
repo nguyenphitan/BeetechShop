@@ -58,23 +58,23 @@
                     <div class="navbar-select">
                         <ul class="navbar-list">
                             <li class="navbar-list_item">
+                                <a href="/" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Trang chủ</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
                                 <a href="/admin-product" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý sản phẩm</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a href="/admin-bill" class="navbar-list_item-link">
-                                    <span class="navbar-list_item-text">Quản lý hóa đơn</span>
-                                </a>
-                            </li>
-                            <li class="navbar-list_item">
-                                <a href="/admin-discount" class="navbar-list_item-link">
+                                <a href="/admin-discount" class="navbar-list_item-link" style="background-color: #005226;">
                                     <span class="navbar-list_item-text">Quản lý mã giảm giá</span>
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a class="navbar-list_item-link">
-                                    <span class="navbar-list_item-text">Quản lý tài khoản</span>
+                                <a href="/admin-bill" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý hóa đơn</span>
                                 </a>
                             </li>
                         </ul>
@@ -120,7 +120,7 @@
                                 <div>
                                 	<div>
                                 		Số tiền cần để đạt được discount:
-		                                <span class="t-title-1" th:text="${discount.value}"></span>
+		                                <span class="t-title-1 t-w-100 t-text-right t-m-right-150" th:text="${discount.value}"></span>
 		                                <input hide class="t-hide t-outline-none input-name-update" type="text" th:value="${discount.value}">
 		                                Giá trị discount:
 		                                <span class="t-title-2" th:text="${discount.discount}"></span>
