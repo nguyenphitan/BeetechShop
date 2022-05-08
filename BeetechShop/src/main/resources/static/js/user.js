@@ -1,6 +1,6 @@
 /**
  * Quản lý tài khoản
- * Created by: NPTAN (25/04/2022)
+ * Created by: NPTAN (08/05/2022)
  * Version: 1.0
  */
  
@@ -10,7 +10,7 @@
 		1. Nếu là SELLER hoặc ADMIN thì làm mờ nút thêm nhân viên
 		2. Ngược lại, hiển thị nút thêm nhân viên
 		
-		Created by: NPTAN (24/04/2022)
+		Created by: NPTAN (08/05/2022)
 		Version: 1.0
 	*/
 	let roles = $('.account_role');
@@ -32,7 +32,7 @@
 		// 2. Gọi đến API thêm seller:
 		$.ajax({
             type: "POST",
-            url: "http://localhost:8088/admin/seller",
+            url: "http://localhost:8081/admin/seller",
             // async: false,
             data: JSON.stringify(id),
             dataType: "json",

@@ -70,7 +70,7 @@
                 <nav class="navbar">
                     <div class="navbar-select">
                         <ul class="navbar-list">
-                            <li class="navbar-list_item">
+                        	<li class="navbar-list_item">
                                 <a href="/" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Trang chủ</span>
                                 </a>
@@ -86,8 +86,18 @@
                                 </a>
                             </li>
                             <li class="navbar-list_item">
-                                <a href="/admin-discount" class="navbar-list_item-link"  style="background-color: #005226;">
+                                <a href="/admin-bill" class="navbar-list_item-link" style="background-color: #005226;">
                                     <span class="navbar-list_item-text">Quản lý hóa đơn</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/seller" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý nhân viên</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/user" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý tài khoản</span>
                                 </a>
                             </li>
                         </ul>
@@ -125,11 +135,11 @@
                             <td>
                                 <div style="display: flex; align-items: center;">
                                 	Họ và tên:
-	                                <span style="width:250px;display:inline-block" th:text="${billResponse.user.username}"></span>
+	                                <span style="width:250px;display:inline-block; margin-left: 4px;" th:text="${billResponse.user.username}"></span>
 	                                SĐT: 
-	                                <span style="width:200px;display:inline-block" th:text="'03' + ${i+1} + ${i+6} + ${i+8} + '2084' + ${i}"></span>
+	                                <span style="width:200px;display:inline-block; margin-left: 4px;" th:text="'03' + ${i+1} + ${i+6} + ${i+8} + '2084' + ${i}"></span>
 	                                Email:
-	                                <span th:text="${billResponse.user.username} + '@gmail.com'"></span></br><br>		
+	                                <span style="margin-left: 4px;" th:text="${billResponse.user.username} + '@gmail.com'"></span></br><br>		
                                 </div>
                             </td>
                             <td th:text="${billResponse.orderDate}" style="text-align: center;"></td>

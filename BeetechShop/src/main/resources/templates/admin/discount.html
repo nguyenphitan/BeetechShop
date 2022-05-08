@@ -57,7 +57,7 @@
                 <nav class="navbar">
                     <div class="navbar-select">
                         <ul class="navbar-list">
-                            <li class="navbar-list_item">
+                        	<li class="navbar-list_item">
                                 <a href="/" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Trang chủ</span>
                                 </a>
@@ -75,6 +75,16 @@
                             <li class="navbar-list_item">
                                 <a href="/admin-bill" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý hóa đơn</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/seller" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý nhân viên</span>
+                                </a>
+                            </li>
+                            <li class="navbar-list_item">
+                                <a href="/admin/user" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý tài khoản</span>
                                 </a>
                             </li>
                         </ul>
@@ -114,7 +124,7 @@
                         </tr>
                     </thead>
                     <tbody class="table-bill-title" th:each="discount, index : ${discounts}">
-                    	<tr class="bill-information-detail">
+                    	<tr>
                             <th scope="row" class="bill-index" th:text="${index.count}" ></th>
                             <td class="t-info-col">
                                 <div>
