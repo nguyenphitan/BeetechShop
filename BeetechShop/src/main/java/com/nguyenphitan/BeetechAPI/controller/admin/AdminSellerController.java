@@ -1,7 +1,5 @@
 package com.nguyenphitan.BeetechAPI.controller.admin;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nguyenphitan.BeetechAPI.entity.User;
-import com.nguyenphitan.BeetechAPI.service.SellerService;
+import com.nguyenphitan.BeetechAPI.service.admin.SellerService;
 
 /**
  * Quản lý nhân viên
@@ -33,10 +30,9 @@ public class AdminSellerController {
 	 * Version: 1.0
 	 */
 	@GetMapping
-	public ModelAndView getSellers() {
+	public ModelAndView sellerPage() {
 		ModelAndView modelAndView = new ModelAndView("admin/seller");
-		List<User> sellers = sellerService.getAllSellers();
-		modelAndView.addObject("sellers", sellers);
+		modelAndView.addObject("sellers", sellerService.getAllSellers());
 		return modelAndView;
 	}
 	

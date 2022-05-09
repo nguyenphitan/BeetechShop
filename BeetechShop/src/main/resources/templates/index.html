@@ -121,6 +121,11 @@
                                     <span class="navbar-list_item-text">Quản lý gian hàng</span>
                                 </a>
                             </li>
+                            <li class="navbar-list_item" th:if="${session.role == 'SELLER'}">
+                                <a th:href="${session.role == 'SELLER' ? '/admin-bill' : '#'}" class="navbar-list_item-link">
+                                    <span class="navbar-list_item-text">Quản lý hóa đơn</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
 

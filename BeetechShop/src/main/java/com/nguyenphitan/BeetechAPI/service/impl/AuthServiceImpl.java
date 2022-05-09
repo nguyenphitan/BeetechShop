@@ -41,7 +41,8 @@ public class AuthServiceImpl implements AuthService {
 	 * Version: 1.0
 	 */
 	@Override
-	public void handleLogin(String username, String password, HttpServletRequest request) {
+	public String handleLogin(String username, String password, HttpServletRequest request) {
+		String jwt = null;
 		try {
 			// Tạo ra LoginRequest từ username và password nhận được từ client
 			LoginRequest loginRequest = new LoginRequest(username, password);
@@ -57,7 +58,7 @@ public class AuthServiceImpl implements AuthService {
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			
 			// Trả về jwt cho người dùng
-			String jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
+			jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
 			// Lưu jwt vào session:
 			HttpSession session = request.getSession();
 			session.setAttribute("token", jwt);
@@ -68,6 +69,8 @@ public class AuthServiceImpl implements AuthService {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
+		return jwt;
 	}
 
 	

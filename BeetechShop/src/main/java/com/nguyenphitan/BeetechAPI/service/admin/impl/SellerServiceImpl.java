@@ -1,4 +1,4 @@
-package com.nguyenphitan.BeetechAPI.service.impl;
+package com.nguyenphitan.BeetechAPI.service.admin.impl;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.nguyenphitan.BeetechAPI.entity.User;
 import com.nguyenphitan.BeetechAPI.repository.UserRepository;
-import com.nguyenphitan.BeetechAPI.service.SellerService;
+import com.nguyenphitan.BeetechAPI.service.admin.SellerService;
 
 @Service
 public class SellerServiceImpl implements SellerService {

@@ -1,19 +1,21 @@
-package com.nguyenphitan.BeetechAPI.service.impl;
+package com.nguyenphitan.BeetechAPI.service.admin.impl;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.nguyenphitan.BeetechAPI.entity.Product;
 import com.nguyenphitan.BeetechAPI.repository.CartRepository;
 import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
-import com.nguyenphitan.BeetechAPI.service.AdminProductService;
+import com.nguyenphitan.BeetechAPI.service.admin.AdminProductService;
 
 @Service
 public class AdminProductServiceimpl implements AdminProductService {
@@ -24,6 +26,20 @@ public class AdminProductServiceimpl implements AdminProductService {
 	
 	@Autowired
 	CartRepository cartRepository;
+	
+	/*
+	 * Hiển thị danh sách tất cả các sản phẩm
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
+	@Override
+	public ModelAndView productPage() {
+		ModelAndView modelAndView = new ModelAndView("admin/product");
+		List<Product> products = productRepository.findAll();
+		modelAndView.addObject("products", products);
+		return modelAndView;
+	}
+	
 	
 	/*
 	 * Thêm mới sản phẩm vào gian hàng
@@ -66,5 +82,6 @@ public class AdminProductServiceimpl implements AdminProductService {
 		// Xóa sản phẩm trong giỏ hàng:
 		cartRepository.deleteByIdProduct(id);
 	}
+
 
 }

@@ -246,5 +246,20 @@ public class CartServiceImpl implements CartService {
 			}
 		}
 	}
+
+
+	/*
+	 * Update số lượng sản phẩm
+	 * Created by: NPTAN (10/04/2022)
+	 * Version: 1.0
+	 */
+	@Override
+	public Cart update(Long id, Long quantityUpdate) {
+		Cart cart = cartRepository.findById(id).get();
+		Long quantityCurrent = cart.getQuantity();
+		cart.setQuantity(quantityCurrent + quantityUpdate);
+		cartRepository.save(cart);
+		return cart;
+	}
 	
 }

@@ -1,4 +1,4 @@
-package com.nguyenphitan.BeetechAPI.service.impl;
+package com.nguyenphitan.BeetechAPI.service.admin.impl;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nguyenphitan.BeetechAPI.entity.Product;
 import com.nguyenphitan.BeetechAPI.iofile.IOFile;
 import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
-import com.nguyenphitan.BeetechAPI.service.CSVService;
+import com.nguyenphitan.BeetechAPI.service.admin.CSVService;
 
 @Service
 public class CSVServiceImpl implements CSVService {

@@ -7,7 +7,7 @@ import com.nguyenphitan.BeetechAPI.entity.User;
 
 public interface AuthService {
 	// Kiểm tra đăng nhập:
-	void handleLogin(String username, String password, HttpServletRequest request);
+	String handleLogin(String username, String password, HttpServletRequest request);
 	
 	// Xử lý đăng ký:
 	User handleRegister(String username, String password);

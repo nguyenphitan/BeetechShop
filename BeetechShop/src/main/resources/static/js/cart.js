@@ -1,26 +1,55 @@
  $(document).ready(function() {
-	
+	// Lấy ra token:
+	let token = $('.t-token').text();
+	console.log(token)
 	// Tính tổng tiền cho mỗi loại sản phẩm:
 	handlePrice();
 	
 	// Tăng giảm số lượng đã chọn:
 	$('.product-cart__btn_left').click(function(e) {
+		// Kiểm tra số lượng hiện tại
 		let quantitySelected = $(e.target).next();
 		let value = Number(quantitySelected.val());
+		let quantityUpdate = -1;
+		
+		// Nếu số lượng hiện tại >= 2 thì mới cho giảm
 		if(value >= 2) {
-			value = Number(quantitySelected.val()) - 1;
-			$(e.target).next().val(value);
-			handlePrice();
+			// Nếu đã đăng nhập -> gọi API update số lượng sản phẩm
+			if(token != 'null') {
+				// 1. Lấy ra product id:
+				let cartId = Number( $(e.target).siblings('.cart-id').text() );
+				// 2. Gọi API update số lượng:
+				updateCart(cartId, quantityUpdate);
+			}
+			else {
+			// Nếu chưa đăng nhập -> update số lượng sản phẩm trên session:
+				// 1. Lấy ra product id: vì cart session là cart ảo nên ko có cart id -> dự vào product id để sửa:
+				let productId = Number( $(e.target).siblings('.product-cart__content').find('.t-product-id').text() );
+				
+				// 2. Gọi API update dữ liệu:
+				updateCloneCart(productId, quantityUpdate);
+			}
 		}
-		console.log($('.t-quantity-selected').val())
 	})
 	
 	$('.product-cart__btn_right').click(function(e) {
-		let quantitySelected = $(e.target).prev();
-		let value = Number(quantitySelected.val());
-		quantitySelected.val( value + 1 );
-		handlePrice();
-		console.log($('.t-quantity-selected').val())
+		let quantityUpdate = 1;
+		// Nếu đã đăng nhập -> gọi API update số lượng sản phẩm
+		if(token != 'null') {
+			// 1. Lấy ra product id:
+			let cartId = Number( $(e.target).siblings('.cart-id').text() );
+			// 2. Gọi API update số lượng:
+			updateCart(cartId, quantityUpdate);
+		}
+		else {
+		// Nếu chưa đăng nhập -> update số lượng sản phẩm trên session:
+			// 1. Lấy ra product id: vì cart session là cart ảo nên ko có cart id -> dự vào product id để sửa:
+			let productId = Number( $(e.target).siblings('.product-cart__content').find('.t-product-id').text() );
+			
+			// 2. Gọi API update dữ liệu:
+			updateCloneCart(productId, quantityUpdate);
+		}
+		
 	})
 	
 	
@@ -32,6 +61,55 @@
 	
 		
 })
+
+
+/*
+	Hàm update số lượng sản phẩm trong giỏ hàng (Khi đã đăng nhập)
+	Created by: NPTAN
+	Version: 1.0
+*/
+function updateCart(cartId, quantityUpdate) {
+	$.ajax({
+        type: "PUT",
+        url: `http://localhost:8081/cart/${cartId}`,
+        // async: false,
+        data: JSON.stringify(quantityUpdate),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (response) {
+            window.location.reload();
+        },
+        error: function(reject) {
+            alert('Không thành công.');
+            console.log(reject);
+        }
+    });
+}
+
+
+/*
+	Hàm update số lượng sản phẩm trong giỏ hàng ảo (Khi chưa đăng nhập)
+	Created by: NPTAN
+	Version: 1.0
+*/
+function updateCloneCart(productId, quantityUpdate) {
+	$.ajax({
+        type: "PUT",
+        url: `http://localhost:8081/clone/cart/${productId}`,
+        // async: false,
+        data: JSON.stringify(quantityUpdate),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (response) {
+            window.location.reload();
+        },
+        error: function(reject) {
+            alert('Không thành công.');
+            console.log(reject);
+        }
+    });	
+}
+
 
 /*
 	Hàm xử lý tính giá tiền.

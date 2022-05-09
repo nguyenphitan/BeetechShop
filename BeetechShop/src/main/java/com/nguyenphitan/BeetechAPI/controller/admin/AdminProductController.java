@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.nguyenphitan.BeetechAPI.entity.Product;
 import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
-import com.nguyenphitan.BeetechAPI.service.AdminProductService;
+import com.nguyenphitan.BeetechAPI.service.admin.AdminProductService;
 
 /**
  * Quản lí sản phẩm: thêm, sửa, xóa

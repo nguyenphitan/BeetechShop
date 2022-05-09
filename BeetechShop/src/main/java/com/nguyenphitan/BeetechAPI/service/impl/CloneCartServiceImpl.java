@@ -48,6 +48,26 @@ public class CloneCartServiceImpl implements CloneCartService {
 		session.setAttribute("cartsSession", cartsSession);
 		return cart;
 	}
+	
+	
+	/*
+	 * Update số lượng sản phẩm trên giỏ hàng ảo:
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
+	@Override
+	public Cart update(Long productId, Long quantityUpdate, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		List<Cart> carts = (List<Cart>) session.getAttribute("cartsSession");
+		for(Cart cart : carts) {
+			if( cart.getIdProduct() == productId ) {
+				Long quantityCurrent = cart.getQuantity();
+				cart.setQuantity(quantityCurrent + quantityUpdate);
+				return cart;
+			}
+		}
+		return null;
+	}
 
 	
 	/*

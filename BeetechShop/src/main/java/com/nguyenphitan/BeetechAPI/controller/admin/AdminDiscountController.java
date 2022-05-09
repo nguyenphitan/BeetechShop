@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.nguyenphitan.BeetechAPI.entity.discount.Discount;
-import com.nguyenphitan.BeetechAPI.service.DiscountService;
+import com.nguyenphitan.BeetechAPI.service.admin.DiscountService;
 
 /*
  * Admin thêm, sửa, xóa mã giảm giá

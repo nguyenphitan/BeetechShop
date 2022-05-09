@@ -1,7 +1,5 @@
 package com.nguyenphitan.BeetechAPI.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nguyenphitan.BeetechAPI.entity.Product;
-import com.nguyenphitan.BeetechAPI.jwt.JwtTokenProvider;
-import com.nguyenphitan.BeetechAPI.repository.CartRepository;
 import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
-import com.nguyenphitan.BeetechAPI.repository.UserRepository;
-import com.nguyenphitan.BeetechAPI.repository.discount.DiscountRepository;
 import com.nguyenphitan.BeetechAPI.service.BillService;
 import com.nguyenphitan.BeetechAPI.service.CartService;
-import com.nguyenphitan.BeetechAPI.service.DiscountService;
+import com.nguyenphitan.BeetechAPI.service.DetailService;
 import com.nguyenphitan.BeetechAPI.service.VNPayService;
+import com.nguyenphitan.BeetechAPI.service.admin.AdminProductService;
+import com.nguyenphitan.BeetechAPI.service.admin.DiscountService;
 
 /**
  * Controller quản lý các page
@@ -29,31 +24,26 @@ import com.nguyenphitan.BeetechAPI.service.VNPayService;
 @Controller
 public class HomeController {
 	@Autowired
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 	
 	@Autowired
-	CartRepository cartRepository;
+	private CartService cartService;
 	
 	@Autowired
-	JwtTokenProvider jwtTokenProvider;
-	
-	@Autowired 
-	UserRepository userRepository;
+	private DiscountService discountService;
 	
 	@Autowired
-	DiscountRepository discountRepository;
+	private VNPayService vnPayService;
 	
 	@Autowired
-	CartService cartService;
+	private BillService billService;
 	
 	@Autowired
-	DiscountService discountService;
+	private AdminProductService adminProductService;
 	
 	@Autowired
-	VNPayService vnPayService;
+	private DetailService detailService;
 	
-	@Autowired
-	BillService billService;
 	
 	/*
 	 * Hiển thị trang home (danh sách các sản phẩm)
@@ -76,8 +66,7 @@ public class HomeController {
 	 */
 	@GetMapping("auth/login")
 	public ModelAndView loginPage() {
-		ModelAndView modelAndView = new ModelAndView("login");
-		return modelAndView;
+		return new ModelAndView("login");
 	}
 	
 	
@@ -88,8 +77,7 @@ public class HomeController {
 	 */
 	@GetMapping("auth/register")
 	public ModelAndView registerPage() {
-		ModelAndView modelAndView = new ModelAndView("register");
-		return modelAndView;
+		return new ModelAndView("register");
 	}
 	
 	
@@ -99,11 +87,8 @@ public class HomeController {
 	 * Version: 1.0
 	 */
 	@GetMapping("/admin-product")
-	public ModelAndView adminPage() {
-		ModelAndView modelAndView = new ModelAndView("admin/product");
-		List<Product> products = productRepository.findAll();
-		modelAndView.addObject("products", products);
-		return modelAndView;
+	public ModelAndView productPage() {
+		return adminProductService.productPage();
 	}
 	
 	
@@ -114,8 +99,7 @@ public class HomeController {
 	 */
 	@GetMapping("/admin/add-product")
 	public ModelAndView addProductPage() {
-		ModelAndView modelAndView = new ModelAndView("admin/add-product");
-		return modelAndView;
+		return new ModelAndView("admin/add-product");
 	}
 	
 	
@@ -126,8 +110,7 @@ public class HomeController {
 	 */
 	@GetMapping("/admin/add-list")
 	public ModelAndView addListProduct() {
-		ModelAndView modelAndView = new ModelAndView("admin/add-list-product");
-		return modelAndView;
+		return new ModelAndView("admin/add-list-product");
 	}
 	
 	
@@ -138,10 +121,7 @@ public class HomeController {
 	 */
 	@GetMapping("/detail")
 	public ModelAndView detailPage(@RequestParam("id") Long id, HttpServletRequest request) {
-		ModelAndView modelAndView = new ModelAndView("detail");
-		modelAndView.addObject("product", productRepository.findById(id));
-		cartService.countCartSize(request);
-		return modelAndView;
+		return detailService.detailPage(id, request);
 	}
 	
 	
@@ -152,8 +132,7 @@ public class HomeController {
 	 */
 	@GetMapping("/list-cart")
 	public ModelAndView cartPage(HttpServletRequest request) {
-		ModelAndView modelAndView = cartService.getAllCart("cart", request);
-		return modelAndView;
+		return cartService.getAllCart("cart", request);
 	}
 	
 	
@@ -164,21 +143,7 @@ public class HomeController {
 	 */
 	@GetMapping("/admin/add-discount")
 	public ModelAndView createDiscount() {
-		ModelAndView modelAndView = new ModelAndView("admin/add-discount");
-		return modelAndView;
-	}
-	
-	
-	/*
-	 * Hiển thị trang quản lý mã giảm giá
-	 * Created by: NPTAN
-	 * Version: 1.0
-	 */
-	@GetMapping("/admin-discount")
-	public ModelAndView discountPage(HttpServletRequest request) {
-		ModelAndView modelAndView = new ModelAndView("admin/discount");
-		modelAndView.addObject("discounts", discountService.getAlls());
-		return modelAndView;
+		return new ModelAndView("admin/add-discount");
 	}
 	
 	
@@ -200,7 +165,19 @@ public class HomeController {
 	 */
 	@GetMapping("/payment")
 	public ModelAndView payment() {
-		ModelAndView modelAndView = new ModelAndView("vnpay");
+		return new ModelAndView("vnpay");
+	}
+	
+	
+	/*
+	 * Hiển thị trang quản lý mã giảm giá
+	 * Created by: NPTAN
+	 * Version: 1.0
+	 */
+	@GetMapping("/admin-discount")
+	public ModelAndView discountPage(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView("admin/discount");
+		modelAndView.addObject("discounts", discountService.getAlls());
 		return modelAndView;
 	}
 	

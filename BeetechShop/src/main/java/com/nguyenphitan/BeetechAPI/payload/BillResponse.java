@@ -16,5 +16,5 @@ public class BillResponse {
 	private List<ProductResponse> products;
 	private Date orderDate;
 	private Integer status;
-	private Long total;
+	private Double total;
 }

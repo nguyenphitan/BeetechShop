@@ -22,4 +22,7 @@ public interface CartService {
 
 	// Đếm số lượng giỏ hàng: (trả về số lượng loại sản phẩm)
 	void countCartSize(HttpServletRequest request);
+	
+	// Update số lượng sản phẩm trong giỏ hàng:
+	Cart update(Long id, Long quantityUpdate);
 }

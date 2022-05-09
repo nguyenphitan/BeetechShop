@@ -3,11 +3,13 @@ package com.nguyenphitan.BeetechAPI.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.nguyenphitan.BeetechAPI.service.AuthService;
@@ -33,13 +35,18 @@ public class AuthController {
 	 * Version: 1.0
 	 */
 	@PostMapping("/login")
-	public RedirectView authenticateUser(
+	public ModelAndView authenticateUser(
 		@RequestParam("username") String username, 
 		@RequestParam("password") String password, 
+		ModelMap model,
 		HttpServletRequest request
 	) {
-		authService.handleLogin(username, password, request);
-		return new RedirectView("/synchronized/cart");
+		String token = authService.handleLogin(username, password, request);
+		if(token == null) {
+			model.addAttribute("error", "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu");
+			return new ModelAndView("login");
+		}
+		return new ModelAndView("redirect:/synchronized/cart", model);
 	}
 	
 	

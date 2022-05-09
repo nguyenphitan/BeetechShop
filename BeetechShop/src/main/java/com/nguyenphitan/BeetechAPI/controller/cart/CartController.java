@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,12 +43,23 @@ public class CartController {
 
 	
 	/*
+	 * Update số lượng sản phẩm
+	 * Created by: NPTAN (10/04/2022)
+	 * Version: 1.0
+	 */
+	@PutMapping("/{id}")
+	public Cart update(@PathVariable("id") Long id, @RequestBody Long quantityUpdate) {
+		return cartService.update(id, quantityUpdate);
+	}
+	
+	
+	/*
 	 * Xóa sản phẩm khỏi giỏ hàng
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */
 	@DeleteMapping("/{id}")
-	public void deleteCart(@PathVariable("id") Long id) {
+	public void delete(@PathVariable("id") Long id) {
 		cartRepository.deleteById(id);
 	}
 	

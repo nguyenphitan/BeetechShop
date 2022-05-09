@@ -75,12 +75,12 @@
                                     <span class="navbar-list_item-text">Trang chủ</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
+                            <li class="navbar-list_item" th:unless="${session.role == 'SELLER'}">
                                 <a href="/admin-product" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý sản phẩm</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
+                            <li class="navbar-list_item" th:unless="${session.role == 'SELLER'}">
                                 <a href="/admin-discount" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý mã giảm giá</span>
                                 </a>
@@ -90,12 +90,12 @@
                                     <span class="navbar-list_item-text">Quản lý hóa đơn</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
+                            <li class="navbar-list_item" th:unless="${session.role == 'SELLER'}">
                                 <a href="/admin/seller" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý nhân viên</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item">
+                            <li class="navbar-list_item" th:unless="${session.role == 'SELLER'}">
                                 <a href="/admin/user" class="navbar-list_item-link">
                                     <span class="navbar-list_item-text">Quản lý tài khoản</span>
                                 </a>

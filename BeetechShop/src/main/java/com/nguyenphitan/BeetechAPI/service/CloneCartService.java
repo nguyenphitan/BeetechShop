@@ -14,6 +14,10 @@ public interface CloneCartService {
 	// Thêm mới sản phẩm vào giỏ hàng trên session:
 	Cart addProductToCloneCart(ProductRequest productRequest, HttpServletRequest request);
 	
+	// Update số lượng sản phẩm trên giỏ hàng ảo session:
+	Cart update(Long productId, Long quantityUpdate, HttpServletRequest request);
+	
 	// Xóa sản phẩm khỏi giỏ hàng trên session:
 	void deleteProduct(Long productId, HttpServletRequest request);
+	
 }

@@ -1,4 +1,4 @@
-package com.nguyenphitan.BeetechAPI.service.impl;
+package com.nguyenphitan.BeetechAPI.service.admin.impl;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.nguyenphitan.BeetechAPI.entity.discount.Discount;
 import com.nguyenphitan.BeetechAPI.repository.discount.DiscountRepository;
-import com.nguyenphitan.BeetechAPI.service.DiscountService;
+import com.nguyenphitan.BeetechAPI.service.admin.DiscountService;
 
 @Service
 public class DiscountServiceImpl implements DiscountService {

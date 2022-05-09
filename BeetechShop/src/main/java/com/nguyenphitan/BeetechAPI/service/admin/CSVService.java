@@ -1,4 +1,4 @@
-package com.nguyenphitan.BeetechAPI.service;
+package com.nguyenphitan.BeetechAPI.service.admin;
 
 import org.springframework.web.multipart.MultipartFile;
 
