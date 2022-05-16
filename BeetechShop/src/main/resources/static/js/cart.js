@@ -1,3 +1,9 @@
+ /*
+ 	Xử lý thanh toán
+ 	Created by: NPTAN
+ 	Version: 1.0
+ */
+ 
  $(document).ready(function() {
 	// Lấy ra token:
 	let token = $('.t-token').text();

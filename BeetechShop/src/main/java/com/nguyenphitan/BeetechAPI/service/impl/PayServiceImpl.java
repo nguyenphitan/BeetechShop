@@ -31,7 +31,6 @@ public class PayServiceImpl implements PayService{
 	@Override
 	public void payment(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String token = (String) session.getAttribute("token");
 		
 		// Xóa sản phẩm trong giỏ hàng
 		// Update số lượng còn lại của mỗi sản phẩm

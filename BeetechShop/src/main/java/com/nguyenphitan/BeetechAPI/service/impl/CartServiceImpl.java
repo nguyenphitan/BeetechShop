@@ -49,9 +49,7 @@ public class CartServiceImpl implements CartService {
 	 * Version: 1.0
 	 */
 	@Override
-	public ModelAndView getAllCart(String page, HttpServletRequest request) {
-		ModelAndView modelAndView = new ModelAndView(page);
-		
+	public List<CartResponse> getAllCart(ModelAndView modelAndView, HttpServletRequest request) {
 		// Lấy user id user từ mã token:
 		HttpSession session = request.getSession();
 		String token = (String) session.getAttribute("token");
@@ -65,7 +63,7 @@ public class CartServiceImpl implements CartService {
 			if( cartsSession == null ) {
 				modelAndView.addObject("listProducts", null);
 				session.setAttribute("listProducts", null);
-				return modelAndView;
+				return null;
 			}
 			// Nếu có sản phẩm -> hiển thị danh sách sản phẩm:
 			for(Cart cart: cartsSession) {
@@ -105,7 +103,7 @@ public class CartServiceImpl implements CartService {
 		session.setAttribute("cartSize", listProducts.size());
 		handlePayment(modelAndView, listProducts, request);
 		
-		return modelAndView;
+		return listProducts;
 	}
 
 	
@@ -168,7 +166,6 @@ public class CartServiceImpl implements CartService {
 		// Đưa số tiền phải thanh toán lên session:
 		HttpSession session = request.getSession();
 		session.setAttribute("realCart", realCart);
-		
 	}
 
 	/*

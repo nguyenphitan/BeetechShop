@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.nguyenphitan.BeetechAPI.entity.Cart;
 import com.nguyenphitan.BeetechAPI.jwt.JwtTokenProvider;
@@ -29,7 +28,7 @@ public class SynchronizedServiceImpl implements SynchronizedService {
 	 * Version: 1.0
 	 */
 	@Override
-	public RedirectView synchronizedCart(HttpServletRequest request) {
+	public List<Cart> synchronizedCart(HttpServletRequest request) {
 		// Lấy user id từ mã token:
 		HttpSession session = request.getSession();
 		String token = (String) session.getAttribute("token");
@@ -67,7 +66,7 @@ public class SynchronizedServiceImpl implements SynchronizedService {
 			}
 			cartRepository.saveAll(cartsSession);
 		}
-		return new RedirectView("/");
+		return cartsSession;
 	}
 
 }

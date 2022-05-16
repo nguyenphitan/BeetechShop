@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.nguyenphitan.BeetechAPI.entity.discount.Discount;
 import com.nguyenphitan.BeetechAPI.repository.discount.DiscountRepository;
@@ -45,12 +44,11 @@ public class DiscountServiceImpl implements DiscountService {
 	 * Version: 1.0
 	 */
 	@Override
-	public RedirectView createDiscount(Double discount, Double value) {
+	public Discount createDiscount(Double discount, Double value) {
 		Discount newDiscount = new Discount();
 		newDiscount.setDiscount(discount);
 		newDiscount.setValue(value);
-		discountRepository.save(newDiscount);
-		return new RedirectView("/admin-discount");
+		return discountRepository.save(newDiscount);
 	}
 
 	

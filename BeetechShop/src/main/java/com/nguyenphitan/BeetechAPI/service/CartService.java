@@ -12,7 +12,7 @@ import com.nguyenphitan.BeetechAPI.payload.ProductRequest;
 
 public interface CartService {
 	// Lấy tất cả sản phẩm trong giỏ hàng:
-	ModelAndView getAllCart(String page, HttpServletRequest request);
+	List<CartResponse> getAllCart(ModelAndView modelAndView, HttpServletRequest request);
 	
 	// Thêm vào giỏ hàng:
 	Cart addToCart(ProductRequest productRequest, HttpServletRequest request);

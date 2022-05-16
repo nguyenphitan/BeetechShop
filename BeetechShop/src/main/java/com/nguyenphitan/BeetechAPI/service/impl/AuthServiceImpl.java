@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.nguyenphitan.BeetechAPI.custom.CustomUserDetails;
 import com.nguyenphitan.BeetechAPI.entity.User;
@@ -112,6 +113,21 @@ public class AuthServiceImpl implements AuthService {
 
 		    response.addCookie(cookie);
 		}
+	}
+
+
+	/*
+	 * Kiểm tra token của người dùng trước khi tới trang đăng nhập, đăng ký
+	 * Created by: NPTAN(13/05/2022)
+	 * Version: 1.0
+	 */
+	@Override
+	public ModelAndView validateToken(String page, HttpSession session) {
+		String token = (String) session.getAttribute("token");
+		if(token != null) {
+			return new ModelAndView("redirect:/");
+		}
+		return new ModelAndView(page);
 	}
 
 }

@@ -2,8 +2,6 @@ package com.nguyenphitan.BeetechAPI.service.admin;
 
 import java.util.List;
 
-import org.springframework.web.servlet.view.RedirectView;
-
 import com.nguyenphitan.BeetechAPI.entity.discount.Discount;
 
 public interface DiscountService {
@@ -14,7 +12,7 @@ public interface DiscountService {
 	Discount getById(Long id);
 	
 	// Thêm mới discount:
-	RedirectView createDiscount(Double discount, Double value);
+	Discount createDiscount(Double discount, Double value);
 	
 	// Sửa theo id:
 	Discount update(Long id, Discount discount);

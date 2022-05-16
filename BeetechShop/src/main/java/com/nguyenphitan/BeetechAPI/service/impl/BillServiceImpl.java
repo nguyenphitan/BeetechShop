@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.nguyenphitan.BeetechAPI.entity.OrderAccount;
 import com.nguyenphitan.BeetechAPI.entity.OrderDetail;
@@ -48,9 +47,7 @@ public class BillServiceImpl implements BillService {
 	 * Version: 1.0
 	 */
 	@Override
-	public ModelAndView billManagerPage() {
-		ModelAndView modelAndView = new ModelAndView("admin/bill");
-		
+	public List<BillResponse> getAllBills() {
 		// 1. Lấy ra danh sách các hóa đơn:
 		List<OrderAccount> orderAccounts = orderAccountRepository.findAll();
 		
@@ -100,9 +97,7 @@ public class BillServiceImpl implements BillService {
 			billResponses.add( new BillResponse(billId, user, products, orderDate, status, total) );
 			
 		}
-		
-		modelAndView.addObject("billResponses", billResponses);
-		return modelAndView;
+		return billResponses;
 	}
 
 	

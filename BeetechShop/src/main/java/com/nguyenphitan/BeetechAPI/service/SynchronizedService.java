@@ -1,9 +1,11 @@
 package com.nguyenphitan.BeetechAPI.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.web.servlet.view.RedirectView;
+import com.nguyenphitan.BeetechAPI.entity.Cart;
 
 public interface SynchronizedService {
-	RedirectView synchronizedCart(HttpServletRequest request);
+	List<Cart> synchronizedCart(HttpServletRequest request);
 }

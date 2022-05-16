@@ -1,13 +1,14 @@
 package com.nguyenphitan.BeetechAPI.service;
 
-import org.springframework.web.servlet.ModelAndView;
+import java.util.List;
 
 import com.nguyenphitan.BeetechAPI.entity.OrderAccount;
 import com.nguyenphitan.BeetechAPI.payload.BillRequest;
+import com.nguyenphitan.BeetechAPI.payload.BillResponse;
 
 public interface BillService {
 	// Hiển thị danh sách tất cả hóa đơn:
-	ModelAndView billManagerPage();
+	List<BillResponse> getAllBills();
 	
 	// Tạo hóa đơn:
 	OrderAccount create(BillRequest billRequest);

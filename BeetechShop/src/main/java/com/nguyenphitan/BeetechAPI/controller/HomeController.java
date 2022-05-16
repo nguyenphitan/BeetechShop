@@ -1,6 +1,7 @@
 package com.nguyenphitan.BeetechAPI.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
+import com.nguyenphitan.BeetechAPI.service.AuthService;
 import com.nguyenphitan.BeetechAPI.service.BillService;
 import com.nguyenphitan.BeetechAPI.service.CartService;
-import com.nguyenphitan.BeetechAPI.service.DetailService;
 import com.nguyenphitan.BeetechAPI.service.VNPayService;
 import com.nguyenphitan.BeetechAPI.service.admin.AdminProductService;
 import com.nguyenphitan.BeetechAPI.service.admin.DiscountService;
@@ -41,8 +42,8 @@ public class HomeController {
 	@Autowired
 	private AdminProductService adminProductService;
 	
-	@Autowired
-	private DetailService detailService;
+	@Autowired 
+	private AuthService authService;
 	
 	
 	/*
@@ -65,8 +66,8 @@ public class HomeController {
 	 * Version: 1.0
 	 */
 	@GetMapping("auth/login")
-	public ModelAndView loginPage() {
-		return new ModelAndView("login");
+	public ModelAndView loginPage(HttpSession session){
+		return authService.validateToken("login", session);
 	}
 	
 	
@@ -76,8 +77,8 @@ public class HomeController {
 	 * Version: 1.0
 	 */
 	@GetMapping("auth/register")
-	public ModelAndView registerPage() {
-		return new ModelAndView("register");
+	public ModelAndView registerPage(HttpSession session) {
+		return authService.validateToken("register", session);
 	}
 	
 	
@@ -121,7 +122,10 @@ public class HomeController {
 	 */
 	@GetMapping("/detail")
 	public ModelAndView detailPage(@RequestParam("id") Long id, HttpServletRequest request) {
-		return detailService.detailPage(id, request);
+		ModelAndView modelAndView = new ModelAndView("detail");
+		modelAndView.addObject("product", productRepository.findById(id));
+		cartService.countCartSize(request);
+		return modelAndView;
 	}
 	
 	
@@ -132,7 +136,9 @@ public class HomeController {
 	 */
 	@GetMapping("/list-cart")
 	public ModelAndView cartPage(HttpServletRequest request) {
-		return cartService.getAllCart("cart", request);
+		ModelAndView modelAndView = new ModelAndView("cart");
+		cartService.getAllCart(modelAndView, request);
+		return modelAndView;
 	}
 	
 	
@@ -154,7 +160,9 @@ public class HomeController {
 	 */
 	@GetMapping("/admin-bill")
 	public ModelAndView billManagerPage() {
-		return billService.billManagerPage();
+		ModelAndView modelAndView = new ModelAndView("admin/bill");
+		modelAndView.addObject("billResponses", billService.getAllBills());
+		return modelAndView;
 	}
 	
 	
@@ -203,7 +211,9 @@ public class HomeController {
 			@RequestParam("vnp_SecureHash") String secureHash
 			
 	) {
-		return vnPayService.vnpayReturnPage(
-				amount, bankCode, bankTranNo, cardType, orderInfo, payDate, responseCode, tmnCode, transactionNo, transactionStatus, txnRef, secureHash);
+		ModelAndView modelAndView = new ModelAndView("vnpay_return");
+		modelAndView.addObject("data", vnPayService.vnpayResponse(amount, bankCode, bankTranNo, 
+				cardType, orderInfo, payDate, responseCode, tmnCode, transactionNo, transactionStatus, txnRef, secureHash));
+		return modelAndView;
 	}
 }

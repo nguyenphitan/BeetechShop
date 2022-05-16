@@ -125,11 +125,6 @@
                                     <span class="navbar-list_item-text">Trang chủ</span>
                                 </a>
                             </li>
-                            <li class="navbar-list_item" th:each="category : ${categoris}">
-                                <a th:href="@{/category/{id}(id=${category.id}) }" class="navbar-list_item-link">
-                                    <span class="navbar-list_item-text" th:text="${category.name}"></span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
 

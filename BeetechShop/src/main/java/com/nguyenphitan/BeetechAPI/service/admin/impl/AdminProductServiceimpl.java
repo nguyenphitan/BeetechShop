@@ -47,7 +47,7 @@ public class AdminProductServiceimpl implements AdminProductService {
 	 * Version: 1.0
 	 */
 	@Override
-	public void addNewProduct(String name, Long price, Long quantity, MultipartFile multipartFile) throws IOException {
+	public Product addNewProduct(String name, Long price, Long quantity, MultipartFile multipartFile) throws IOException {
 		Path staticPath = Paths.get("src/main/resources/static");
         Path imagePath = Paths.get("img");
         // Kiểm tra tồn tại hoặc tạo thư mục /static/images
@@ -64,8 +64,7 @@ public class AdminProductServiceimpl implements AdminProductService {
         product.setPrice(price);
         product.setQuantity(quantity);
         product.setPhotos(imagePath.resolve(multipartFile.getOriginalFilename()).toString());
-        productRepository.save(product);
-		
+        return productRepository.save(product);
 	}
 
 	

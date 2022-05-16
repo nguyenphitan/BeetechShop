@@ -58,7 +58,8 @@ public class AdminDiscountController {
 	 */
 	@PostMapping()
 	public RedirectView addDiscount(@RequestParam("discount") Double discount, @RequestParam("value") Double value) {
-		return discountService.createDiscount(discount, value);
+		discountService.createDiscount(discount, value);
+		return new RedirectView("/admin-discount");
 	}
 	
 	

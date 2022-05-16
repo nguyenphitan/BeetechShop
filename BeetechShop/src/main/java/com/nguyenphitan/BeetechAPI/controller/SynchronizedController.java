@@ -29,7 +29,8 @@ public class SynchronizedController {
 	 */
 	@GetMapping("/cart")
 	public RedirectView synchronizedCart(HttpServletRequest request) {
-		return synchronizedService.synchronizedCart(request);
+		synchronizedService.synchronizedCart(request);
+		return new RedirectView("/");
 	}
 	
 }

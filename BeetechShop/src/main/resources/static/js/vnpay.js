@@ -1,5 +1,5 @@
 /**
- * Quản lý tài khoản
+ * Xử lý thanh toán ví điện tử
  * Created by: NPTAN (25/04/2022)
  * Version: 1.0
  */
