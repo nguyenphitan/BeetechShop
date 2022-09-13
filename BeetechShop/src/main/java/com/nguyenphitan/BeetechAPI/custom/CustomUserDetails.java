@@ -13,6 +13,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Custom user details
+ * @author ADMIN
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -17,6 +17,11 @@ import com.nguyenphitan.BeetechAPI.repository.CartRepository;
 import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
 import com.nguyenphitan.BeetechAPI.service.admin.AdminProductService;
 
+/**
+ * Admin product manager service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class AdminProductServiceimpl implements AdminProductService {
 	private static final Path CURRENT_FOLDER = Paths.get(System.getProperty("user.dir"));
@@ -28,7 +33,7 @@ public class AdminProductServiceimpl implements AdminProductService {
 	CartRepository cartRepository;
 	
 	/*
-	 * Hiển thị danh sách tất cả các sản phẩm
+	 * Get alls product
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -42,7 +47,7 @@ public class AdminProductServiceimpl implements AdminProductService {
 	
 	
 	/*
-	 * Thêm mới sản phẩm vào gian hàng
+	 * Add new product
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -50,7 +55,6 @@ public class AdminProductServiceimpl implements AdminProductService {
 	public Product addNewProduct(String name, Long price, Long quantity, MultipartFile multipartFile) throws IOException {
 		Path staticPath = Paths.get("src/main/resources/static");
         Path imagePath = Paths.get("img");
-        // Kiểm tra tồn tại hoặc tạo thư mục /static/images
         if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
             Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
         }
@@ -69,16 +73,13 @@ public class AdminProductServiceimpl implements AdminProductService {
 
 	
 	/*
-	 * Xóa sản phẩm khỏi gian hàng
+	 * Delete product by id
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
 	@Override
 	public void deleteProduct(Long id) {
-		// Xóa sản phẩm trong danh sách product:
 		productRepository.deleteById(id);
-		
-		// Xóa sản phẩm trong giỏ hàng:
 		cartRepository.deleteByIdProduct(id);
 	}
 

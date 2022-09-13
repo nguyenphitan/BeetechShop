@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.nguyenphitan.BeetechAPI.service.admin.SellerService;
 
 /**
- * Quản lý nhân viên
+ * Seller manager controller
  * Created by: NPTAN (08/05/2022)
  * Version: 1.0
  */
@@ -25,7 +25,7 @@ public class AdminSellerController {
 	SellerService sellerService;
 	
 	/*
-	 * Hiển thị ra danh sách nhân viên
+	 * Get all 
 	 * Created by: NPTAN (08/05/2022)
 	 * Version: 1.0
 	 */
@@ -37,7 +37,7 @@ public class AdminSellerController {
 	}
 	
 	/*
-	 * Thêm nhân viên (add role SELLER cho tài khoản)
+	 * Add a new seller (add role SELLER into account)
 	 * Created by: NPTAN (08/05/2022)
 	 * Version: 1.0
 	 */
@@ -47,7 +47,7 @@ public class AdminSellerController {
 	}
 	
 	/*
-	 * Xóa nhân viên (chỉ xóa role, không xóa tài khoản)
+	 * Delete seller by id (delete only role, not delete account)
 	 * Created by: NPTAN (08/05/2022)
 	 * Version: 1.0 
 	 */

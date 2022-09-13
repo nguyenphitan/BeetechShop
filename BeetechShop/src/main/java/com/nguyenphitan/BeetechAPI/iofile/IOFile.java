@@ -14,6 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.nguyenphitan.BeetechAPI.entity.Product;
 
+/**
+ * IOfile
+ * @author ADMIN
+ *
+ */
 public class IOFile {
 	public static String TYPE = "text/csv";
 	static String[] HEADERs = { "id", "name", "price", "quantity", "photos" };
@@ -25,6 +30,11 @@ public class IOFile {
 		return true;
 	}
 
+	/**
+	 * Build list product from csv file
+	 * @param is
+	 * @return
+	 */
 	public static List<Product> csvProducts(InputStream is) {
 		try (
 				BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));

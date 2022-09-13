@@ -18,7 +18,7 @@ import com.nguyenphitan.BeetechAPI.entity.discount.Discount;
 import com.nguyenphitan.BeetechAPI.service.admin.DiscountService;
 
 /*
- * Admin thêm, sửa, xóa mã giảm giá
+ * Discount manager controller
  * Created by: NPTAN (15/04/2022)
  * Version: 1.0
  */
@@ -30,7 +30,7 @@ public class AdminDiscountController {
 	DiscountService discountService;
 	
 	/*
-	 * Lấy ra tất cả mã giảm giá
+	 * Get all
 	 * Created by: NPTAN (15/04/2022)
 	 * Version: 1.0
 	 */
@@ -41,7 +41,7 @@ public class AdminDiscountController {
 	
 	
 	/*
-	 * Lấy ra mã giảm giá theo id
+	 * Get discount by id
 	 * Created by: NPTAN (15/04/2022)
 	 * Version: 1.0
 	 */
@@ -52,7 +52,7 @@ public class AdminDiscountController {
 	
 	
 	/*
-	 * Thêm mới mã giảm giá
+	 * Create a new discount
 	 * Created by: NPTAN (15/04/2022)
 	 * Version: 1.0
 	 */
@@ -64,7 +64,7 @@ public class AdminDiscountController {
 	
 	
 	/*
-	 * Cập nhật mã giảm giá
+	 * Update discount with id
 	 * Created by: NPTAN (15/04/2022)
 	 * Version: 1.0
 	 */
@@ -75,7 +75,7 @@ public class AdminDiscountController {
 	
 	
 	/*
-	 * Loại bỏ mã giảm giá
+	 * Delete discount by id
 	 * Created by: NPTAN (15/04/2022)
 	 * Version: 1.0
 	 */

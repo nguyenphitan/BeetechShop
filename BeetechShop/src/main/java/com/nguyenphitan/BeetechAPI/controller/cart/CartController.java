@@ -18,7 +18,7 @@ import com.nguyenphitan.BeetechAPI.repository.CartRepository;
 import com.nguyenphitan.BeetechAPI.service.CartService;
 
 /**
- * Controller giỏ hàng
+ * Cart manager controller
  * Created by: NPTAN (10/04/2022)
  * Version: 1.0
  */
@@ -32,7 +32,7 @@ public class CartController {
 	CartService cartService;
 	
 	/*
-	 * Thêm sản phẩm vào giỏ hàng
+	 * Add product to cart
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */
@@ -43,7 +43,7 @@ public class CartController {
 
 	
 	/*
-	 * Update số lượng sản phẩm
+	 * Update quantity
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */
@@ -54,7 +54,7 @@ public class CartController {
 	
 	
 	/*
-	 * Xóa sản phẩm khỏi giỏ hàng
+	 * Delete product from cart
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */

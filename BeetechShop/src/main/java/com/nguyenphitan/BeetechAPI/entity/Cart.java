@@ -6,9 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.nguyenphitan.BeetechAPI.message.Message;
 
 import lombok.Data;
 
+/**
+ * Cart entity
+ * @author ADMIN
+ *
+ */
 @Entity
 @Table(name = "cart")
 @Data
@@ -17,13 +25,16 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	/** Product id */
+	@NotNull(message = Message.NOT_NULL)
 	private Long idProduct;
 	
-	@NotBlank
+	/** User id */
+	@NotNull(message = Message.NOT_NULL)
 	private Long idUser;
 	
-	@NotBlank
+	/** Quantity selected */
+	@NotBlank(message = Message.NOT_BLANK)
 	private Long quantity;
 	
 }

@@ -5,6 +5,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Config resource
+ * @author ADMIN
+ *
+ */
 @Configurable
 @EnableWebMvc
 public class ConfigResource implements WebMvcConfigurer{

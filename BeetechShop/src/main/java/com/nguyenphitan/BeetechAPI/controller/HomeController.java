@@ -18,7 +18,7 @@ import com.nguyenphitan.BeetechAPI.service.admin.AdminProductService;
 import com.nguyenphitan.BeetechAPI.service.admin.DiscountService;
 
 /**
- * Controller quản lý các page
+ * Page manager controller
  * Created by: NPTAN
  * Version: 1.0
  */
@@ -47,7 +47,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị trang home (danh sách các sản phẩm)
+	 * View home (get list product)
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -61,7 +61,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị đăng nhập
+	 * View login 
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -72,7 +72,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị đăng ký
+	 * View register 
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -83,7 +83,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị trang quản lý sản phẩm
+	 * View product manager
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -94,7 +94,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị trang thêm mới sản phẩm
+	 * View add new product
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -105,7 +105,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị trang thêm mới danh sách sản phẩm
+	 * View import list product
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -116,7 +116,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị trang chi tiết sản phẩm
+	 * View product detail
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -130,7 +130,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị danh sách sản phẩm trong giỏ hàng
+	 * View list product in cart
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -143,7 +143,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị trang thêm mới mã giảm giá
+	 * View add new discount
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -154,7 +154,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị trang quản lý hóa đơn
+	 * View bill manager
 	 * Created by: NPTAN (06/05/2022)
 	 * Version: 1.0
 	 */
@@ -167,7 +167,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị giao diện thanh toán online
+	 * View online payment (VNPay)
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -178,7 +178,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị trang quản lý mã giảm giá
+	 * View discount manager
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -191,7 +191,7 @@ public class HomeController {
 	
 	
 	/*
-	 * Hiển thị thông tin sau khi thanh toán cho khách hàng
+	 * View return online payment
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

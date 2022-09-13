@@ -13,18 +13,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.nguyenphitan.BeetechAPI.jwt.JwtAuthenticationFilter;
 
+/**
+ * Web Security config
+ * @author ADMIN
+ *
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	// Tạo Bean PasswordEndcoder
+	// Create Bean PasswordEndcoder
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	// Tạo Bean AuthenticationManager
+	// Create Bean AuthenticationManager
 	@Bean(BeanIds.AUTHENTICATION_MANAGER)
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -32,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
-	// Tạo Bean JwtAuthenticationFilter
+	// Create Bean JwtAuthenticationFilter
 	@Bean
 	public JwtAuthenticationFilter jwtAuthenticationFilter() {
 		return new JwtAuthenticationFilter();

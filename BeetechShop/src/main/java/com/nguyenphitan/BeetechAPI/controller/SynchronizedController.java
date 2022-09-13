@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.nguyenphitan.BeetechAPI.service.SynchronizedService;
 
 /**
- * Đồng bộ giỏ hàng
+ * Synchronized cart controller
  * Created by: NPTAN
  * Version: 1.0
  */
@@ -23,7 +23,7 @@ public class SynchronizedController {
 	SynchronizedService synchronizedService;
 	
 	/*
-	 * Đồng bộ giỏ hàng khi đăng nhập thành công
+	 * Synchronized cart after login success
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

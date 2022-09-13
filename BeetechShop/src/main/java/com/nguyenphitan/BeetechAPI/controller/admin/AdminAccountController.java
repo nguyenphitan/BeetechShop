@@ -12,7 +12,7 @@ import com.nguyenphitan.BeetechAPI.entity.User;
 import com.nguyenphitan.BeetechAPI.repository.UserRepository;
 
 /**
- * Quản lý tài khoản
+ * User manager controller
  * Created by: NPTAN (08/05/2022)
  * Version: 1.0
  */
@@ -24,7 +24,7 @@ public class AdminAccountController {
 	UserRepository userRepository;
 
 	/*
-	 * Hiển thị tất cả tài khoản
+	 * Get all user detail
 	 * Created by: NPTAN (08/05/2022)
 	 * Version: 1.0
 	 */

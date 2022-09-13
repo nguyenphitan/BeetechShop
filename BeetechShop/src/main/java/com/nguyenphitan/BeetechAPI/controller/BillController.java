@@ -12,6 +12,11 @@ import com.nguyenphitan.BeetechAPI.entity.OrderAccount;
 import com.nguyenphitan.BeetechAPI.payload.BillRequest;
 import com.nguyenphitan.BeetechAPI.service.BillService;
 
+/**
+ * Bill manager controller
+ * @author ADMIN
+ *
+ */
 @RestController
 @RequestMapping("/public/bill")
 public class BillController {
@@ -20,9 +25,7 @@ public class BillController {
 	private BillService billService;
 	
 	/*
-	 * Tạo hóa đơn
-	 * 1. Lưu id hóa đơn, id khách hàng vào bảng order_account, ngày đặt hàng
-	 * 2. Lưu id hóa 
+	 * Create a new bill
 	 */
 	@PostMapping
 	public OrderAccount create(@RequestBody BillRequest billRequest) {
@@ -31,7 +34,7 @@ public class BillController {
 	
 	
 	/*
-	 * Cập nhật hóa đơn (chỉ cập nhật status)
+	 * Update bill by id (update only status)
 	 * Created by: NPTAN (06/05/2022)
 	 * Version: 1.0
 	 */

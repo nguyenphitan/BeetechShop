@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import com.nguyenphitan.BeetechAPI.entity.User;
 
+/**
+ * User repository
+ * @author ADMIN
+ *
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUsername(String username);

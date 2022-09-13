@@ -5,6 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.nguyenphitan.BeetechAPI.entity.Product;
 
+/**
+ * Product repository
+ * @author ADMIN
+ *
+ */
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	

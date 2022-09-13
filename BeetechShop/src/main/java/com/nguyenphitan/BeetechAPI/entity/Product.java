@@ -5,11 +5,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.nguyenphitan.BeetechAPI.message.Message;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Product entity
+ * @author ADMIN
+ *
+ */
 @Entity
 @Table(name = "product")
 @Data
@@ -27,11 +36,18 @@ public class Product {
 		this.photos = photos;
 	}
 	
+	/** Product name */
+	@NotBlank(message = Message.NOT_BLANK)
 	private String name;
 	
+	/** Product price */
+	@NotNull(message = Message.NOT_NULL)
 	private Long price;
 	
+	/** Product quantity */
+	@NotNull(message = Message.NOT_NULL)
 	private Long quantity;
 	
+	/** Product photos */
 	private String photos;
 }

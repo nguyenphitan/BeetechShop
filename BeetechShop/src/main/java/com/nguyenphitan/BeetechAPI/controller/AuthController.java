@@ -17,7 +17,7 @@ import com.nguyenphitan.BeetechAPI.service.AuthService;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Đăng nhập, đăng ký, đăng xuất.
+ * Auth controller
  * Created by: NPTAN
  * Version: 1.0
  */
@@ -30,7 +30,7 @@ public class AuthController {
 	
 	
 	/*
-	 * Đăng nhập, xác thực
+	 * Check login
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -43,7 +43,7 @@ public class AuthController {
 	) {
 		String token = authService.handleLogin(username, password, request);
 		if(token == null) {
-			model.addAttribute("error", "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu");
+			model.addAttribute("error", "Please check your account or password again");
 			return new ModelAndView("login");
 		}
 		return new ModelAndView("redirect:/synchronized/cart", model);
@@ -51,7 +51,7 @@ public class AuthController {
 	
 	
 	/*
-	 * Đăng ký thêm mới tài khoản
+	 * Register new account
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -63,7 +63,7 @@ public class AuthController {
 	
 	
 	/*
-	 * Đăng xuất tài khoản
+	 * Logout
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

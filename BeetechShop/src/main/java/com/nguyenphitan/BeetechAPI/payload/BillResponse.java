@@ -8,6 +8,11 @@ import com.nguyenphitan.BeetechAPI.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Return bill
+ * @author ADMIN
+ *
+ */
 @Data
 @AllArgsConstructor
 public class BillResponse {

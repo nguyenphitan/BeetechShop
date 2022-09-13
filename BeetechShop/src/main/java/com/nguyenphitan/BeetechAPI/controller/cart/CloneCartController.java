@@ -17,7 +17,7 @@ import com.nguyenphitan.BeetechAPI.payload.ProductRequest;
 import com.nguyenphitan.BeetechAPI.service.CloneCartService;
 
 /**
- * Giỏ hàng ảo (khi chưa đăng nhập)
+ * Clone cart (Not logged in)
  * Created by: NPTAN (10/04/2022)
  * Version: 1.0
  */
@@ -29,7 +29,7 @@ public class CloneCartController {
 	CloneCartService cloneCartService;
 	
 	/*
-	 * Thêm sản phẩm vào giỏ hàng
+	 * Add product to cart
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */
@@ -40,7 +40,7 @@ public class CloneCartController {
 	
 	
 	/*
-	 * Update số lượng sản phẩm
+	 * Update product quantity
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */
@@ -51,7 +51,7 @@ public class CloneCartController {
 	
 	
 	/*
-	 * Xóa sản phẩm khỏi giỏ hàng
+	 * Delete product from cart
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */

@@ -7,6 +7,11 @@ import com.nguyenphitan.BeetechAPI.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Return cart
+ * @author ADMIN
+ *
+ */
 @Data
 @AllArgsConstructor
 public class CartResponse {

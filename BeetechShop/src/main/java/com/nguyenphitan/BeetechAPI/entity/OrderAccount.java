@@ -7,11 +7,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.nguyenphitan.BeetechAPI.message.Message;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Order account
+ * @author ADMIN
+ *
+ */
 @Entity@Table(name = "order_account")
 @Data
 @AllArgsConstructor
@@ -21,6 +29,7 @@ public class OrderAccount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull(message = Message.NOT_NULL)
 	private Long userId;
 	
 	private Date orderDate;

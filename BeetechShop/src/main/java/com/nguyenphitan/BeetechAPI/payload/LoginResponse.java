@@ -2,6 +2,11 @@ package com.nguyenphitan.BeetechAPI.payload;
 
 import lombok.Data;
 
+/**
+ * Return login
+ * @author ADMIN
+ *
+ */
 @Data
 public class LoginResponse {
 	private String accessToken;

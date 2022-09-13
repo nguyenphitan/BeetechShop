@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 
 import com.nguyenphitan.BeetechAPI.entity.Cart;
 
+/**
+ * Cart repository
+ * @author ADMIN
+ *
+ */
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
 	List<Cart> findByIdUser(Long idUser);

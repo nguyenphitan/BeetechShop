@@ -14,7 +14,7 @@ import com.nguyenphitan.BeetechAPI.iofile.IOFile;
 import com.nguyenphitan.BeetechAPI.service.admin.CSVService;
 
 /**
- * Admin thêm mới nhiều sản phẩm. (csv file)
+ * Import list product. (csv file)
  * Created by: NPTAN
  * Version: 1.0
  */
@@ -26,7 +26,7 @@ public class CSVController {
 	CSVService fileService;
 
 	/*
-	 * Upload file csv chứa danh sách các sản phẩm
+	 * Import list product from csv file
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

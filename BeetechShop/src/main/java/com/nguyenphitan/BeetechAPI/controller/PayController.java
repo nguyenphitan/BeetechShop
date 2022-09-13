@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nguyenphitan.BeetechAPI.service.PayService;
 
 /**
- * Thanh toán
+ * Payment manager controller
  * Created by: NPTAN
  * Version: 1.0
  */
@@ -23,7 +23,7 @@ public class PayController {
 	
 	
 	/*
-	 * Reset giỏ hàng khi thanh toán thành công
+	 * Clear cart after payment success
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

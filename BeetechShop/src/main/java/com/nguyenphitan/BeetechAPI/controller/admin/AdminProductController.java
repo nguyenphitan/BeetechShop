@@ -21,7 +21,7 @@ import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
 import com.nguyenphitan.BeetechAPI.service.admin.AdminProductService;
 
 /**
- * Quản lí sản phẩm: thêm, sửa, xóa
+ * Product manager controller
  * Created by: NPTAN (10/04/2022)
  * Version: 1.0
  */
@@ -36,7 +36,7 @@ public class AdminProductController {
 	ProductRepository productRepository;
 	
 	/*
-	 * Thêm mới sản phẩm
+	 * Add new product
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */
@@ -53,7 +53,7 @@ public class AdminProductController {
 
 	
 	/*
-	 * Cập nhật thông tin sản phẩm
+	 * Update product with id
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */
@@ -64,7 +64,7 @@ public class AdminProductController {
 
 	
 	/*
-	 * Xóa sản phẩm
+	 * Delete product by id
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */

@@ -20,6 +20,11 @@ import com.nguyenphitan.BeetechAPI.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * User manager controller
+ * @author ADMIN
+ *
+ */
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
@@ -32,7 +37,7 @@ public class UserController {
 	PasswordEncoder passwordEncoder;
 
 	/*
-	 * Lấy ra danh sách các user
+	 * Get alls
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -43,7 +48,7 @@ public class UserController {
 
 	
 	/*
-	 * Lấy ra user theo id
+	 * Get user by id
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -56,7 +61,7 @@ public class UserController {
 
 	
 	/*
-	 * Cập nhật thông tin user
+	 * Update user with id
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -68,7 +73,7 @@ public class UserController {
 
 	
 	/*
-	 * Xóa user
+	 * Delete user by id
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

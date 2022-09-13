@@ -9,6 +9,11 @@ import com.nguyenphitan.BeetechAPI.entity.discount.Discount;
 import com.nguyenphitan.BeetechAPI.repository.discount.DiscountRepository;
 import com.nguyenphitan.BeetechAPI.service.admin.DiscountService;
 
+/**
+ * Admin discount manager service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class DiscountServiceImpl implements DiscountService {
 	
@@ -17,7 +22,7 @@ public class DiscountServiceImpl implements DiscountService {
 
 
 	/*
-	 * Lấy toàn bộ discount
+	 * Get alls discount
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -28,7 +33,7 @@ public class DiscountServiceImpl implements DiscountService {
 
 	
 	/*
-	 * Lấy discount theo id
+	 * Get discount by id
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -39,7 +44,7 @@ public class DiscountServiceImpl implements DiscountService {
 
 	
 	/*
-	 * Thêm mới discount
+	 * Create new discount
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -53,7 +58,7 @@ public class DiscountServiceImpl implements DiscountService {
 
 	
 	/*
-	 * Sửa discount
+	 * Update discount with id
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -64,7 +69,7 @@ public class DiscountServiceImpl implements DiscountService {
 
 	
 	/*
-	 * Xóa discount
+	 * Delete discount by id
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

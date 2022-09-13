@@ -15,7 +15,7 @@ import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Controller sản phẩm
+ * Product manager controller
  * Created by: NPTAN
  * Version: 1.0
  */
@@ -27,7 +27,7 @@ public class ProductController {
 	ProductRepository productRepository;
 	
 	/*
-	 * Lấy ra tất cả sản phẩm
+	 * Get alls
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -38,7 +38,7 @@ public class ProductController {
 	
 	
 	/*
-	 * Lấy sản phẩm theo id
+	 * Get product by id
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

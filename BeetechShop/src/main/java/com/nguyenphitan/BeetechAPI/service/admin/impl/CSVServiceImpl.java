@@ -12,6 +12,11 @@ import com.nguyenphitan.BeetechAPI.iofile.IOFile;
 import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
 import com.nguyenphitan.BeetechAPI.service.admin.CSVService;
 
+/**
+ * Admin import list product service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class CSVServiceImpl implements CSVService {
 	
@@ -19,7 +24,7 @@ public class CSVServiceImpl implements CSVService {
 	ProductRepository productRepository;
 
 	/*
-	 * Lưu danh sách sản phẩm vào database
+	 * Save list product into DB
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

@@ -7,9 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Discount entity
+ * @author ADMIN
+ *
+ */
 @Entity
 @Table(name = "discount")
 @Data
@@ -18,9 +22,15 @@ public class Discount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	/**
+	 * Value to gain discount
+	 */
 	@NotBlank
 	private Double value;
 	
+	/**
+	 * Discount value
+	 */
 	@NotBlank
 	private Double discount;
 }

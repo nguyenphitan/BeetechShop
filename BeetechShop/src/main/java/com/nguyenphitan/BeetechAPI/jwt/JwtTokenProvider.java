@@ -14,21 +14,25 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Jwt token provider
+ * @author ADMIN
+ *
+ */
 @Component
 @Slf4j
 public class JwtTokenProvider {
 
-	// Đoạn mã JWT_SECRET
+	// JWT SECRET
 	private final String JWT_SECRET = "nguyenphitan";
 
-	// Thời gian hiệu lực của mỗi chuỗi jwt
+	// Validity time of each string jwt
 	private final long JWT_EXPIRATION = 604800000L;
 
-	// Tạo ra jwt từ thông tin user
+	// Create jwt token from user information
 	public String generateToken(CustomUserDetails userDetails) {
 		Date now = new Date();
 		Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
-		// Tạo chuỗi jwt từ id của user
 		return Jwts.builder()
 					.setSubject(Long.toString(userDetails.getUser().getId()))
 					.setIssuedAt(now)
@@ -37,7 +41,7 @@ public class JwtTokenProvider {
 					.compact();
 	}
 	
-	// Lấy thông tin user từ jwt
+	// Get user info from jwt
 	public Long getUserIdFromJWT(String token) {
 		Claims claims = Jwts.parser()
 							.setSigningKey(JWT_SECRET)
