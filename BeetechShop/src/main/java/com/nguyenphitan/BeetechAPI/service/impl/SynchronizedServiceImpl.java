@@ -13,6 +13,11 @@ import com.nguyenphitan.BeetechAPI.jwt.JwtTokenProvider;
 import com.nguyenphitan.BeetechAPI.repository.CartRepository;
 import com.nguyenphitan.BeetechAPI.service.SynchronizedService;
 
+/**
+ * Cart synchronized service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class SynchronizedServiceImpl implements SynchronizedService {
 	
@@ -23,21 +28,20 @@ public class SynchronizedServiceImpl implements SynchronizedService {
 	JwtTokenProvider jwtTokenProvider;
 
 	/*
-	 * Đồng bộ giỏ hàng khi đăng nhập thành công
+	 * Cart synchronized with cart clone after login success
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
 	@Override
 	public List<Cart> synchronizedCart(HttpServletRequest request) {
-		// Lấy user id từ mã token:
 		HttpSession session = request.getSession();
 		String token = (String) session.getAttribute("token");
 		Long idUser = jwtTokenProvider.getUserIdFromJWT(token);
 		
-		// Get danh sách giỏ hàng -> đồng bộ
+		// Get list product from cart clone
 		List<Cart> cartsSession = (List<Cart>) session.getAttribute("cartsSession");
 		
-		// 1. Update số lượng với những sản phẩm đã có trong giỏ hàng ứng với user id -> xóa sản phẩm khỏi session
+		// Update quantity with products already in cart with user id -> remove products from session
 		if( cartsSession != null ) {
 			List<Cart> carts = cartRepository.findByIdUser(idUser);
 			for(Cart cartDB : carts) {
@@ -49,7 +53,7 @@ public class SynchronizedServiceImpl implements SynchronizedService {
 							Long quantity = cartDB.getQuantity() + cartSS.getQuantity();
 							cartDB.setQuantity(quantity);
 							cartRepository.save(cartDB);
-							// Xóa sản phẩm khỏi session:
+							// remove product from cart clone
 							cartsSession.remove(cartSS);
 							break;
 						}
@@ -59,7 +63,7 @@ public class SynchronizedServiceImpl implements SynchronizedService {
 			
 		}
 		
-		// 2. Thêm mới vào database với những sản phẩm chưa có trong giỏ hàng ứng với user id -> xóa sản phẩm khỏi session
+		// Add new to database with products not in cart with user id -> remove products from session
 		if( cartsSession != null ) {
 			for(Cart cart : cartsSession) {
 				cart.setIdUser(idUser);

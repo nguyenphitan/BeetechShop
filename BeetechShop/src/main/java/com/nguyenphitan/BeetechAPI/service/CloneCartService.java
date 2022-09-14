@@ -6,18 +6,33 @@ import com.nguyenphitan.BeetechAPI.entity.Cart;
 import com.nguyenphitan.BeetechAPI.payload.ProductRequest;
 
 /*
- * Service xử lý nghiệp vụ giỏ hàng khi chưa đăng nhập
+ * Cart clone service
  * Created by: NPTAN
  * Version: 1.0
  */
 public interface CloneCartService {
-	// Thêm mới sản phẩm vào giỏ hàng trên session:
+	/**
+	 * Add product to cart
+	 * @param productRequest
+	 * @param request
+	 * @return
+	 */
 	Cart addProductToCloneCart(ProductRequest productRequest, HttpServletRequest request);
 	
-	// Update số lượng sản phẩm trên giỏ hàng ảo session:
+	/**
+	 * Update product quantity
+	 * @param productId
+	 * @param quantityUpdate
+	 * @param request
+	 * @return
+	 */
 	Cart update(Long productId, Long quantityUpdate, HttpServletRequest request);
 	
-	// Xóa sản phẩm khỏi giỏ hàng trên session:
+	/**
+	 * Delete product by id
+	 * @param productId
+	 * @param request
+	 */
 	void deleteProduct(Long productId, HttpServletRequest request);
 	
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nguyenphitan.BeetechAPI.vnpay;
 
 import java.io.UnsupportedEncodingException;
@@ -15,13 +10,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- *
- * @author xonv
+ * VNPay config
+ * @author 
  */
 public class Config {
 

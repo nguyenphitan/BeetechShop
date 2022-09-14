@@ -10,19 +10,47 @@ import com.nguyenphitan.BeetechAPI.entity.Cart;
 import com.nguyenphitan.BeetechAPI.payload.CartResponse;
 import com.nguyenphitan.BeetechAPI.payload.ProductRequest;
 
+/**
+ * Cart service
+ * @author ADMIN
+ *
+ */
 public interface CartService {
-	// Lấy tất cả sản phẩm trong giỏ hàng:
+	/**
+	 * Get all products from cart
+	 * @param modelAndView
+	 * @param request
+	 * @return
+	 */
 	List<CartResponse> getAllCart(ModelAndView modelAndView, HttpServletRequest request);
 	
-	// Thêm vào giỏ hàng:
+	/**
+	 * Add product to cart
+	 * @param productRequest
+	 * @param request
+	 * @return
+	 */
 	Cart addToCart(ProductRequest productRequest, HttpServletRequest request);
 
-	// Xử lý nghiệp vụ liên quan đến thanh toán:
+	/**
+	 * Payment handler
+	 * @param modelAndView
+	 * @param listCartResponses
+	 * @param request
+	 */
 	void handlePayment(ModelAndView modelAndView, List<CartResponse> listCartResponses, HttpServletRequest request);
 
-	// Đếm số lượng giỏ hàng: (trả về số lượng loại sản phẩm)
+	/**
+	 * Count cart size
+	 * @param request
+	 */
 	void countCartSize(HttpServletRequest request);
 	
-	// Update số lượng sản phẩm trong giỏ hàng:
+	/**
+	 * Update product quantity from cart
+	 * @param id
+	 * @param quantityUpdate
+	 * @return
+	 */
 	Cart update(Long id, Long quantityUpdate);
 }

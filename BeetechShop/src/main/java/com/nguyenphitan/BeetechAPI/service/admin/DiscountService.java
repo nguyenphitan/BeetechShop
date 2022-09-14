@@ -4,20 +4,45 @@ import java.util.List;
 
 import com.nguyenphitan.BeetechAPI.entity.discount.Discount;
 
+/**
+ * Discount service
+ * @author ADMIN
+ *
+ */
 public interface DiscountService {
-	// Lấy tất cả discount:
+	/**
+	 * Get all discounts
+	 * @return
+	 */
 	List<Discount> getAlls();
-	
-	// Lấy discount theo id:
+
+	/**
+	 * Get discount by id
+	 * @param id
+	 * @return
+	 */
 	Discount getById(Long id);
 	
-	// Thêm mới discount:
+	/**
+	 * Create a new discount
+	 * @param discount
+	 * @param value
+	 * @return
+	 */
 	Discount createDiscount(Double discount, Double value);
 	
-	// Sửa theo id:
+	/**
+	 * Update discount with id
+	 * @param id
+	 * @param discount
+	 * @return
+	 */
 	Discount update(Long id, Discount discount);
 	
-	// Xóa theo id:
+	/**
+	 * Delete by id
+	 * @param id
+	 */
 	void delete(Long id);
 	
 }

@@ -8,17 +8,42 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nguyenphitan.BeetechAPI.entity.User;
 
+/**
+ * Auth service
+ * @author ADMIN
+ *
+ */
 public interface AuthService {
-	// Kiểm tra đăng nhập:
+	/**
+	 * Check login
+	 * @param username
+	 * @param password
+	 * @param request
+	 * @return
+	 */
 	String handleLogin(String username, String password, HttpServletRequest request);
 	
-	// Xử lý đăng ký:
+	/**
+	 * Register new account
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	User handleRegister(String username, String password);
 	
-	// Xử lý đăng xuất:
+	/**
+	 * Logout service
+	 * @param request
+	 * @param response
+	 */
 	void handleLogout(HttpServletRequest request, HttpServletResponse response);
 	
-	// Kiểm tra token khi người dùng nhập URL vào trang login hoặc register:
+	/**
+	 * Validate token
+	 * @param page
+	 * @param session
+	 * @return
+	 */
 	ModelAndView validateToken(String page, HttpSession session);
 	
 }

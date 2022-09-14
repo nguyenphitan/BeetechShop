@@ -4,14 +4,29 @@ import java.util.List;
 
 import com.nguyenphitan.BeetechAPI.entity.User;
 
+/**
+ * Seller manager service
+ * @author ADMIN
+ *
+ */
 public interface SellerService {
-	// Lấy tất cả các account có role là SELLER
+	/**
+	 * Get alls
+	 * @return
+	 */
 	List<User> getAllSellers();
 	
-	// Thêm Seller:
+	/**
+	 * Add a new seller
+	 * @param id
+	 * @return
+	 */
 	int addSeller(int id);
 	
-	// Xóa Seller:
+	/**
+	 * Delete by id
+	 * @param id
+	 */
 	void deleteSeller(int id);
 	
 }

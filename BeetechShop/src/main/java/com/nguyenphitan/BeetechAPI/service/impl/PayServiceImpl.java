@@ -14,6 +14,11 @@ import com.nguyenphitan.BeetechAPI.repository.CartRepository;
 import com.nguyenphitan.BeetechAPI.repository.ProductRepository;
 import com.nguyenphitan.BeetechAPI.service.PayService;
 
+/**
+ * Payment service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class PayServiceImpl implements PayService{
 
@@ -24,7 +29,7 @@ public class PayServiceImpl implements PayService{
 	ProductRepository productRepository;
 	
 	/*
-	 * Thanh toán đơn hàng -> Reset giỏ hàng
+	 * Payment bill -> Clear cart
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -32,8 +37,8 @@ public class PayServiceImpl implements PayService{
 	public void payment(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
-		// Xóa sản phẩm trong giỏ hàng
-		// Update số lượng còn lại của mỗi sản phẩm
+		// Delete product from cart
+		// Update product remaining quantity
 		List<CartResponse> listProducts = (List<CartResponse>) session.getAttribute("listProducts");
 		
 		for ( CartResponse cart : listProducts ) {
@@ -45,8 +50,6 @@ public class PayServiceImpl implements PayService{
 			product.setQuantity(quantity);
 			productRepository.save(product);
 		}
-		
-		// Xóa list sản phẩm khỏi session:
 		session.removeAttribute("listProducts");
 	}
 

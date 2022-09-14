@@ -6,13 +6,28 @@ import com.nguyenphitan.BeetechAPI.entity.OrderAccount;
 import com.nguyenphitan.BeetechAPI.payload.BillRequest;
 import com.nguyenphitan.BeetechAPI.payload.BillResponse;
 
+/**
+ * Bill service
+ * @author ADMIN
+ *
+ */
 public interface BillService {
-	// Hiển thị danh sách tất cả hóa đơn:
+	/*
+	 * Get alls
+	 */
 	List<BillResponse> getAllBills();
 	
-	// Tạo hóa đơn:
+	/**
+	 * Create bill
+	 * @param billRequest
+	 * @return
+	 */
 	OrderAccount create(BillRequest billRequest);
 	
-	// Cập nhật hóa đơn:
+	/**
+	 * Update bill with id
+	 * @param id
+	 * @return
+	 */
 	OrderAccount update(Long id);
 }

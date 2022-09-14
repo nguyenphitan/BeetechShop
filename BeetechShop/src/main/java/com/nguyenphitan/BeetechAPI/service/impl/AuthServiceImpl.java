@@ -21,6 +21,11 @@ import com.nguyenphitan.BeetechAPI.payload.LoginRequest;
 import com.nguyenphitan.BeetechAPI.repository.UserRepository;
 import com.nguyenphitan.BeetechAPI.service.AuthService;
 
+/**
+ * Auth service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class AuthServiceImpl implements AuthService {
 	
@@ -37,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
 	PasswordEncoder passwordEncoder;
 
 	/*
-	 * Kiểm tra thông tin đăng nhập
+	 * Check login
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -45,25 +50,20 @@ public class AuthServiceImpl implements AuthService {
 	public String handleLogin(String username, String password, HttpServletRequest request) {
 		String jwt = null;
 		try {
-			// Tạo ra LoginRequest từ username và password nhận được từ client
 			LoginRequest loginRequest = new LoginRequest(username, password);
-			// Xác thực thông tin người dùng Request lên:
 			Authentication authentication = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(
 							loginRequest.getUsername(), 
 							loginRequest.getPassword()
 					)
 			);
-			// Nếu không xảy ra exception tức là thông tin hợp lệ
-			// Set thông tin authentication vào Security Context
+			// Set authentication into Security Context
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 			
-			// Trả về jwt cho người dùng
+			// Generate token
 			jwt = tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
-			// Lưu jwt vào session:
 			HttpSession session = request.getSession();
 			session.setAttribute("token", jwt);
-			
 			Long userId = tokenProvider.getUserIdFromJWT(jwt);
 			User user = userRepository.getById(userId);
 			session.setAttribute("role", user.getRole());
@@ -76,7 +76,7 @@ public class AuthServiceImpl implements AuthService {
 
 	
 	/*
-	 * Xử lý thông tin đăng ký tài khoản
+	 * Register new account
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -92,32 +92,28 @@ public class AuthServiceImpl implements AuthService {
 
 	
 	/*
-	 * Xử lý đăng xuất
+	 * Logout service
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
 	@Override
 	public void handleLogout(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		// Xóa token khỏi session:
 		session.removeAttribute("token");
-		// Xóa fullname khỏi session:
 		session.removeAttribute("username");
-		// Xóa role:
 		session.removeAttribute("role");
-		// Xóa tất cả cookies:
+		// Reset cookies:
 		for (Cookie cookie : request.getCookies()) {
 		    cookie.setValue("");
 		    cookie.setMaxAge(0);
 		    cookie.setPath("/");
-
 		    response.addCookie(cookie);
 		}
 	}
 
 
 	/*
-	 * Kiểm tra token của người dùng trước khi tới trang đăng nhập, đăng ký
+	 * Validate token
 	 * Created by: NPTAN(13/05/2022)
 	 * Version: 1.0
 	 */

@@ -12,11 +12,16 @@ import com.nguyenphitan.BeetechAPI.entity.Cart;
 import com.nguyenphitan.BeetechAPI.payload.ProductRequest;
 import com.nguyenphitan.BeetechAPI.service.CloneCartService;
 
+/**
+ * Clone cart service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class CloneCartServiceImpl implements CloneCartService {
 
 	/*
-	 * Thêm vào giỏ hàng session:
+	 * Add product to cart
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -26,8 +31,7 @@ public class CloneCartServiceImpl implements CloneCartService {
 		List<Cart> cartsSession = null;
 		if( session.getAttribute("cartsSession") != null ) {
 			cartsSession = (List<Cart>) session.getAttribute("cartsSession");
-			// update số lượng cho sản phẩm (Nếu sản phẩm đã có trong session):
-			for(Cart cart : cartsSession) {
+			for(Cart cart : cartsSession) {		// update product quantity
 				if( cart.getIdProduct() == productRequest.getIdProduct() ) {
 					cart.setQuantity( cart.getQuantity() + productRequest.getQuantitySelected() );
 					session.setAttribute("cartsSession", cartsSession);
@@ -38,7 +42,7 @@ public class CloneCartServiceImpl implements CloneCartService {
 		else {
 			cartsSession = new ArrayList<Cart>();
 		}
-		// Thêm mới sản phẩm (Nếu sản phẩm không có trong session)
+		// Add new product
 		Cart cart = new Cart();
 		cart.setIdProduct(productRequest.getIdProduct());
 		cart.setIdUser(-1L);
@@ -51,7 +55,7 @@ public class CloneCartServiceImpl implements CloneCartService {
 	
 	
 	/*
-	 * Update số lượng sản phẩm trên giỏ hàng ảo:
+	 * Update product quantity
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -71,7 +75,7 @@ public class CloneCartServiceImpl implements CloneCartService {
 
 	
 	/*
-	 * Xóa khỏi giỏ hàng session:
+	 * Delete product from cart
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
@@ -86,7 +90,6 @@ public class CloneCartServiceImpl implements CloneCartService {
 				break;
 			}
 		}
-		System.out.println(carts.size());
 	}
 
 }

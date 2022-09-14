@@ -12,21 +12,35 @@ import com.nguyenphitan.BeetechAPI.custom.CustomUserDetails;
 import com.nguyenphitan.BeetechAPI.entity.User;
 import com.nguyenphitan.BeetechAPI.repository.UserRepository;
 
+/**
+ * User service
+ * @author ADMIN
+ *
+ */
 @Service
 public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
 
-	// Kiểm tra xem user có tồn tại trong Database hay không?
+	/**
+	 * Check user valid
+	 * @param username
+	 * @return
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) {
 		User user = userRepository.findByUsername(username).orElseThrow(
-				() -> new UsernameNotFoundException("Tai khoan mat khau khong chinh xac")
+				() -> new UsernameNotFoundException("Username invalid")
 		);
 		return new CustomUserDetails(user);
 	}
 	
+	/**
+	 * Get user by id
+	 * @param id
+	 * @return
+	 */
 	@Transactional
 	public UserDetails loadUserById(Long id) {
 		User user = userRepository.findById(id).orElseThrow(

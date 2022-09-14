@@ -7,9 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.nguyenphitan.BeetechAPI.service.VNPayService;
 
+/**
+ * VNPay service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class VNPayServiceImpl implements VNPayService {
 
+	/**
+	 * Return payment data
+	 * @return
+	 */
 	@Override
 	public Map<String, String> vnpayResponse(String amount, String bankCode, String bankTranNo, String cardType,
 			String orderInfo, String payDate, String responseCode, String tmnCode, String transactionNo,

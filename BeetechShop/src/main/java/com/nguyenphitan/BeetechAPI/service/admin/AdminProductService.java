@@ -7,13 +7,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.nguyenphitan.BeetechAPI.entity.Product;
 
+/**
+ * Product manager service
+ * @author ADMIN
+ *
+ */
 public interface AdminProductService {
-	// Hiển thị danh sách sản phẩm:
+	// Get all products
 	ModelAndView productPage();
 	
-	// Thêm một sản phẩm mới:
+	// Add new product
 	Product addNewProduct(String name, Long price, Long quantity, MultipartFile multipartFile) throws IOException;
 	
-	// Xóa sản phẩm khỏi gian hàng:
+	// Delete product by id
 	void deleteProduct(Long id);
 }

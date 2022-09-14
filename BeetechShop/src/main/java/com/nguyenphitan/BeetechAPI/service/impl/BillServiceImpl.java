@@ -23,6 +23,11 @@ import com.nguyenphitan.BeetechAPI.repository.UserRepository;
 import com.nguyenphitan.BeetechAPI.service.BillService;
 import com.nguyenphitan.BeetechAPI.service.admin.DiscountService;
 
+/**
+ * Bill service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class BillServiceImpl implements BillService {
 	
@@ -42,38 +47,30 @@ public class BillServiceImpl implements BillService {
 	private DiscountService discountService;
 	
 	/*
-	 * Hiển thị danh sách hóa đơn
+	 * Get alls
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
 	@Override
 	public List<BillResponse> getAllBills() {
-		// 1. Lấy ra danh sách các hóa đơn:
+		// Get alls
 		List<OrderAccount> orderAccounts = orderAccountRepository.findAll();
 		
-		// 2. Lấy ra danh sách chi tiết của các hóa đơn:
+		// Get detail
 		List<OrderDetail> orderDetails = orderDetailRepository.findAll();
 		
-		// 3. Danh sách dữ liệu hóa đơn trả về: (id hóa đơn, thông tin khách hàng, danh sách sản phẩm kèm số lượng, tổng tiền, ngày mua, trạng thái hóa đơn)
+		// Build dto (id, user, listProduct, totalPrice, purchaseDate, status)
 		List<BillResponse> billResponses = new ArrayList<BillResponse>();
 		for(OrderAccount orderAccount : orderAccounts) {
-			// Lấy ra id hóa đơn:
 			Long billId = orderAccount.getId();
-			// Lấy ra thông tin nhân viên:
-			User user = userRepository.getById(orderAccount.getUserId());
-			// Lấy ra mua: (ngày tạo hóa đơn)
-			Date orderDate = orderAccount.getOrderDate();
-			// Lấy ra trạng thái hóa đơn:
-			Integer status = orderAccount.getStatus();
-			// List danh sách sản phẩm trong hóa đơn:
-			List<ProductResponse> products = new ArrayList<ProductResponse>();
-			// Lấy ra tất cả các mã giảm giá:
-			List<Discount> discounts = discountService.getAlls();
-			// Tổng tiền hóa đơn:
-			Double total = 0D;
+			User user = userRepository.getById(orderAccount.getUserId()); 	// get user
+			Date orderDate = orderAccount.getOrderDate();	// purchaseDate
+			Integer status = orderAccount.getStatus();	// status
+			List<ProductResponse> products = new ArrayList<ProductResponse>();	// listProducts
+			List<Discount> discounts = discountService.getAlls();	// discounts
+			Double total = 0D;	// totalPrice
 			for(OrderDetail orderDetail : orderDetails) {
 				if( orderAccount.getId() == orderDetail.getOrderAccountId() ) {
-					// Thêm sản phẩm vào list hóa đơn:
 					Product product = productRepository.getById(orderDetail.getProductId());
 					products.add( new ProductResponse(product, orderDetail.getQuantity()) );
 					Long totalPrice = orderDetail.getQuantity() * product.getPrice();
@@ -102,23 +99,18 @@ public class BillServiceImpl implements BillService {
 
 	
 	/*
-	 * Tạo hóa đơn
+	 * Create bill
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
 	@Override
 	public OrderAccount create(BillRequest billRequest) {
-		// Lấy ra useId:
 		Long userId = billRequest.getUserId();
-		
-		// 1. Tạo một order_account -> Lưu vào db:
-		OrderAccount orderAccount = new OrderAccount(userId);
-		
-		// 2. Lấy ra order_account_id vừa mới lưu vào db:
+		OrderAccount orderAccount = new OrderAccount(userId);	// order account
 		OrderAccount orderAccountCurrentSave = orderAccountRepository.save(orderAccount);
 		Long orderAccountId = orderAccountCurrentSave.getId();
 		
-		// 3. Tạo các order_detail ứng với order_account_id và danh sách sản phẩm -> Lưu vào db:
+		// Build order detail
 		List<ProductRequest> productRequests = billRequest.getProductRequests();
 		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 		for(ProductRequest productRequest : productRequests) {
@@ -132,7 +124,7 @@ public class BillServiceImpl implements BillService {
 
 	
 	/*
-	 * Cập nhật hóa đơn
+	 * Update bill with id
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */

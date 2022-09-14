@@ -24,6 +24,11 @@ import com.nguyenphitan.BeetechAPI.repository.UserRepository;
 import com.nguyenphitan.BeetechAPI.repository.discount.DiscountRepository;
 import com.nguyenphitan.BeetechAPI.service.CartService;
 
+/**
+ * Cart service implements
+ * @author ADMIN
+ *
+ */
 @Service
 public class CartServiceImpl implements CartService {
 
@@ -44,28 +49,25 @@ public class CartServiceImpl implements CartService {
 	
 	
 	/*
-	 * Lấy ra tất cả các sản phẩm trong giỏ hàng
+	 * Get all products in cart
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
 	@Override
 	public List<CartResponse> getAllCart(ModelAndView modelAndView, HttpServletRequest request) {
-		// Lấy user id user từ mã token:
 		HttpSession session = request.getSession();
 		String token = (String) session.getAttribute("token");
 		
 		List<CartResponse> listProducts = new ArrayList<CartResponse>();
 		
-		// Nếu chưa có token -> get list cart từ session
+		// Get list product from clone cart if token is null
 		if(token == null) {
 			List<Cart> cartsSession = (List<Cart>) session.getAttribute("cartsSession");
-			// Nếu chưa có sản phẩm -> hiển thị chưa có sản phẩm nào:
 			if( cartsSession == null ) {
 				modelAndView.addObject("listProducts", null);
 				session.setAttribute("listProducts", null);
 				return null;
 			}
-			// Nếu có sản phẩm -> hiển thị danh sách sản phẩm:
 			for(Cart cart: cartsSession) {
 				Long idCart = cart.getId();
 				Long idProduct = cart.getIdProduct();
@@ -76,7 +78,7 @@ public class CartServiceImpl implements CartService {
 			}
 		}
 		else {	
-			// Nếu đã có token -> get giỏ hàng từ database tương ứng với idUser:
+			// Get list product from cart if token is valid
 			Long idUser = jwtTokenProvider.getUserIdFromJWT(token);
 			User user = userRepository.getById(idUser);
 			List<Cart> listCarts = cartRepository.findByIdUser(idUser);
@@ -91,9 +93,6 @@ public class CartServiceImpl implements CartService {
 				}							
 			}
 			modelAndView.addObject("userInfo", user);
-
-		
-			// Chuyển user id lên session:
 			session.setAttribute("idUser", idUser);
 		
 		}
@@ -108,17 +107,17 @@ public class CartServiceImpl implements CartService {
 
 	
 	/*
-	 * Xử lý nghiệp vụ liên quan đến thanh toán:
-	 * 1. Tính toán discount, giá trị discount
-	 * 2. Tính toán giá trị sau khi trừ discount
-	 * 3. Gợi ý discount tiếp theo
+	 * Payment service
+	 * 1. Calculate discount
+	 * 2. Calculate total price after sub discount
+	 * 3. Suggestions next discount
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
 	@Override
 	public void handlePayment(ModelAndView modelAndView, List<CartResponse> listCartResponses,
 			HttpServletRequest request) {
-		// Tính tổng tiền trong giỏ hàng -> gợi ý discount (DiscountService)
+		// Total price
 		Double totalCart = 0D;
 		for(CartResponse cart : listCartResponses) {
 			Long productPrice = cart.getProduct().getPrice();
@@ -127,8 +126,8 @@ public class CartServiceImpl implements CartService {
 			totalCart += totalPrice;
 		}
 		
-		// Gợi ý discount:
-		// 1. Lấy ra discount hiện tại: (nếu có)
+		// Suggestions discount
+		// 1. Get current discount: (if any)
 		Double currentDiscount = 0D;
 		Double nextDiscount = 0D;
 		Double nextValue = 0D;
@@ -149,11 +148,11 @@ public class CartServiceImpl implements CartService {
 			}
 		}
 		
-		// 2. Tính toán lại tổng tiền sau khi trừ discount:
+		// 2.  Calculate total price after sub discount:
 		Double discountValue = (totalCart * currentDiscount)/100;
 		Long realCart = Math.round(totalCart - discountValue);
 		
-		// 3. Gợi ý mua thêm xx tiền để đạt discount tiếp theo:
+		// 3. Suggestions next discount and value:
 		Double valueToNextDiscount = nextValue - totalCart; 
 		
 		modelAndView.addObject("currentDiscount", currentDiscount);
@@ -163,29 +162,25 @@ public class CartServiceImpl implements CartService {
 		modelAndView.addObject("totalCart", totalCart);
 		modelAndView.addObject("realCart", realCart);
 		
-		// Đưa số tiền phải thanh toán lên session:
 		HttpSession session = request.getSession();
 		session.setAttribute("realCart", realCart);
 	}
 
 	/*
-	 * Thêm sản phẩm vào giỏ hàng
+	 * Add product to cart
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
 	@Override
 	public Cart addToCart(ProductRequest productRequest, HttpServletRequest request) {
-		// Lấy user id user từ mã token:
+		// Get user id from token:
 		HttpSession session = request.getSession();
 		String token = (String) session.getAttribute("token");
 		Long idUser = jwtTokenProvider.getUserIdFromJWT(token);
 		Long idProduct = productRequest.getIdProduct();
 		Long quantitySelected = productRequest.getQuantitySelected();
 		
-		// Update số lượng sản phẩm trong giỏ hàng:
-		// Tìm kiếm sản phẩm có id = id sản phẩm được thêm:
-		// Nếu có -> update số lượng sản phẩm trong giỏ hàng (thêm) ứng với user id.
-		// Nếu không có -> thêm mới 
+		// Update cart quantity:
 		List<Cart> listCarts = cartRepository.findByIdProduct(idProduct);
 		if( !listCarts.isEmpty() ) {
 			for(Cart cart : listCarts) {
@@ -206,18 +201,16 @@ public class CartServiceImpl implements CartService {
 
 
 	/*
-	 * Đếm số lượng giỏ hàng (cart size)
+	 * Return cart size
 	 * Created by: NPTAN
 	 * Version: 1.0
 	 */
 	@Override
 	public void countCartSize(HttpServletRequest request) {
-		// Lấy user id user từ mã token:
 		HttpSession session = request.getSession();
 		String token = (String) session.getAttribute("token");
 		
-		// Khi chưa đăng nhập: (chưa có token)
-		// Load số lượng sản phẩm trên session:
+		// Return clone cart size: ( if token is null )
 		if(token == null) {
 			List<Cart> cartsSession = (List<Cart>) session.getAttribute("cartsSession");
 			int cartSize = 0;
@@ -227,8 +220,7 @@ public class CartServiceImpl implements CartService {
 			session.setAttribute("cartSize", cartSize);
 		}
 		else {
-		// Khi đã đăng nhập
-		// Load số lượng sản phẩm trong giỏ hàng ứng với từng idUser:
+		// Return cart size ( if token is valid )
 			Long idUser = jwtTokenProvider.getUserIdFromJWT(token);
 			User user = userRepository.getById(idUser);
 			String username = user.getUsername();
@@ -246,7 +238,7 @@ public class CartServiceImpl implements CartService {
 
 
 	/*
-	 * Update số lượng sản phẩm
+	 * Update product quantity
 	 * Created by: NPTAN (10/04/2022)
 	 * Version: 1.0
 	 */
